@@ -70,6 +70,8 @@
         "vue3-konami-code": "^1.0.0"
     },
     "overrides": {
-        "@tiptap/core": "^3.31.3"
+        "@tiptap/core": "^3.31.3",
+        "echarts": "^6.1.0",
+        "uuid": "^11.1.1"
     }
 }
