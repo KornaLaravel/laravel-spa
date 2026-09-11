@@ -15,8 +15,11 @@ const editorData = ref(props.modelValue || '');
 const emit = defineEmits(['update:modelValue']);
 
 // CKEditor 5 requires a license key from v44 onwards. "GPL" selects the
-// open source licence when no commercial key is configured.
-const licenseKey = CK_EDITOR_KEY || 'GPL';
+// open source licence when no commercial key is configured. CK_EDITOR_KEY is a
+// global declared by the Blade layout, not a module import, so it is read
+// through typeof: a bare reference throws a ReferenceError if this component is
+// ever mounted on a page that does not declare it.
+const licenseKey = typeof CK_EDITOR_KEY === 'string' && CK_EDITOR_KEY ? CK_EDITOR_KEY : 'GPL';
 
 const editorConfig = ref({
   licenseKey,
