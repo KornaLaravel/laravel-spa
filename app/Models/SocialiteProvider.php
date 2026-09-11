@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SocialiteProvider extends Model
 {
@@ -72,19 +75,19 @@ class SocialiteProvider extends Model
      * @var array
      */
     protected $casts = [
-        'id'                => 'integer',
-        'user_id'           => 'integer',
-        'provider'          => 'string',
-        'provider_user_id'  => 'string',
-        'access_token'      => 'string',
-        'refresh_token'     => 'string',
-        'avatar'            => 'string',
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'provider' => 'string',
+        'provider_user_id' => 'string',
+        'access_token' => 'string',
+        'refresh_token' => 'string',
+        'avatar' => 'string',
     ];
 
     /**
      * Get the user that owns the socialite provider.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {

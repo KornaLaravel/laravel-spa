@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Permissions;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,11 +26,11 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
             // 'slug'              => 'required|string|unique:permissions,slug',
-            'description'       => 'nullable|string|max:255',
-            'model'             => 'string|nullable',
-            'roles'             => 'present|array',
+            'description' => 'nullable|string|max:255',
+            'model' => 'string|nullable',
+            'roles' => 'present|array',
         ];
     }
 }

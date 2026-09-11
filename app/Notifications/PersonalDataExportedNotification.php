@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
@@ -8,8 +10,11 @@ use Spatie\PersonalDataExport\Notifications\PersonalDataExportedNotification as 
 class PersonalDataExportedNotification extends SpatiePersonalDataExportedNotification
 {
     public static $toMailCallback;
+
     public $zipFilename;
+
     public $deletionDatetime;
+
     public $username;
 
     public function __construct(string $zipFilename)
@@ -31,7 +36,7 @@ class PersonalDataExportedNotification extends SpatiePersonalDataExportedNotific
             return call_user_func(static::$toMailCallback, $notifiable, $downloadUrl);
         }
 
-        return (new MailMessage())
+        return (new MailMessage)
             ->greeting(trans('emails.personal-data-exports.notifications.greeting', ['username' => $this->username]))
             ->subject(trans('emails.personal-data-exports.notifications.subject'))
             ->line(trans('emails.personal-data-exports.notifications.instructions'))

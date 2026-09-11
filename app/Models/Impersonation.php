@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,9 +33,9 @@ class Impersonation extends Model
     ];
 
     protected $casts = [
-        'id'                        => 'integer',
-        'user_id'                   => 'integer',
-        'personal_access_token_id'  => 'string',
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'personal_access_token_id' => 'string',
     ];
 
     public function user()

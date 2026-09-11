@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -18,16 +20,16 @@ class Controller extends BaseController
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data'    => $data,
+            'data' => $data,
         ], $code);
     }
 
-    protected function errorResponse($message = null, $code)
+    protected function errorResponse($message, $code)
     {
         return response()->json([
             'success' => false,
             'message' => $message,
-            'data'    => null,
+            'data' => null,
         ], $code);
     }
 }

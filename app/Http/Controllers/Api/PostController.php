@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -126,9 +128,9 @@ class PostController extends Controller
     {
         if ($post->user_id !== auth()->id() && ! auth()->user()->hasPermission('delete.articles')) {
             return response()->json([
-                'status'    => 405,
-                'success'   => false,
-                'message'   => 'You can only delete your own posts',
+                'status' => 405,
+                'success' => false,
+                'message' => 'You can only delete your own posts',
             ]);
         } else {
             $post->delete();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,12 +26,12 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required|min:3|max:255',
-            'email'             => 'required|email|unique:users,email',
-            'password'          => 'required|min:6|max:255|confirmed',
-            'roles'             => 'present|array',
-            'permissions'       => 'present|array',
-            'theme_dark'        => 'nullable|boolean',
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|max:255|confirmed',
+            'roles' => 'present|array',
+            'permissions' => 'present|array',
+            'theme_dark' => 'nullable|boolean',
             'email_verified_at' => 'nullable|boolean',
         ];
     }

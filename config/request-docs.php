@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'enabled' => true,
     // change it to true will make lrd to throw exception if rules in request class need to be changed
@@ -10,12 +12,12 @@ return [
     * Route where request docs will be served from laravel app.
     * localhost:8080/request-docs
     */
-    'url'         => 'api-docs',
+    'url' => 'api-docs',
     'middlewares' => [
         // \Rakutentech\LaravelRequestDocs\NotFoundWhenProduction::class,
     ],
 
-    //Use only routes where ->uri start with next string Using Str::startWith( . e.g. - /api/mobile
+    // Use only routes where ->uri start with next string Using Str::startWith( . e.g. - /api/mobile
     'only_route_uri_start_with' => '',
 
     'hide_matching' => [
@@ -28,9 +30,9 @@ return [
         '#^_tt#',
     ],
 
-    'hide_meta_data'   => false,
-    'hide_sql_data'    => false,
-    'hide_logs_data'   => false,
+    'hide_meta_data' => false,
+    'hide_sql_data' => false,
+    'hide_logs_data' => false,
     'hide_models_data' => false,
 
     // https://github.com/rakutentech/laravel-request-docs/pull/92
@@ -54,26 +56,26 @@ return [
     // open api config
     // used to generate open api json
     'open_api' => [
-        'title'       => 'Laravel Request Docs',
+        'title' => 'Laravel Request Docs',
         'description' => 'Laravel Request Docs',
         // default version that this library provides
         'version' => '3.0.0',
         // changeable
         'document_version' => '1.0.0',
         // license that you want to display
-        'license'     => 'Apache 2.0',
+        'license' => 'Apache 2.0',
         'license_url' => 'https://www.apache.org/licenses/LICENSE-2.0.html',
-        'server_url'  => env('APP_URL', 'http://localhost'),
-        //openapi 3.0.x doesn't support request body for delete operation
-        //ref: https://github.com/OAI/OpenAPI-Specification/pull/2117
+        'server_url' => env('APP_URL', 'http://localhost'),
+        // openapi 3.0.x doesn't support request body for delete operation
+        // ref: https://github.com/OAI/OpenAPI-Specification/pull/2117
         'delete_with_body' => false,
-        //exclude http methods that will be excluded from openapi export
+        // exclude http methods that will be excluded from openapi export
         'exclude_http_methods' => [],
         // for now putting default responses for all. This can be changed later based on specific needs
         'responses' => [
             '200' => [
                 'description' => 'Successful operation',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -83,7 +85,7 @@ return [
             ],
             '400' => [
                 'description' => 'Bad Request',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -93,7 +95,7 @@ return [
             ],
             '401' => [
                 'description' => 'Unauthorized',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -103,7 +105,7 @@ return [
             ],
             '403' => [
                 'description' => 'Forbidden',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -113,7 +115,7 @@ return [
             ],
             '404' => [
                 'description' => 'Not Found',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -123,7 +125,7 @@ return [
             ],
             '422' => [
                 'description' => 'Unprocessable Entity',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -133,7 +135,7 @@ return [
             ],
             '500' => [
                 'description' => 'Internal Server Error',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',
@@ -143,7 +145,7 @@ return [
             ],
             'default' => [
                 'description' => 'Unexpected error',
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => [
                             'type' => 'object',

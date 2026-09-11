@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\View\Composers;
 
 use App\Models\Setting;
@@ -22,7 +24,6 @@ class GaComposer
     /**
      * Bind data to the view.
      *
-     * @param  \Illuminate\View\View  $view
      * @return void
      */
     public function compose(View $view)

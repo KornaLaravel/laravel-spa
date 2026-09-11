@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -36,11 +38,11 @@ class SendPasswordResetEmail extends Notification // implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
+        return (new MailMessage)
             ->subject(trans('emails.password.changed.subject'))
             ->greeting(trans('emails.password.changed.greeting', ['username' => $this->user->name]))
             ->line(trans('emails.password.changed.message'))

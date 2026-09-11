@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -49,10 +51,10 @@ class PermissionsController extends Controller
         $validated = $request->validated();
 
         $permission = Permission::create([
-            'name'          => $validated['name'],
-            'slug'          => $validated['slug'],
-            'description'   => $validated['description'],
-            'model'         => $validated['model'],
+            'name' => $validated['name'],
+            'slug' => $validated['slug'],
+            'description' => $validated['description'],
+            'model' => $validated['model'],
         ]);
 
         if ($permission) {
@@ -65,7 +67,7 @@ class PermissionsController extends Controller
         ]);
 
         return response()->json([
-            'permission'  => $permission,
+            'permission' => $permission,
         ]);
     }
 
@@ -99,7 +101,7 @@ class PermissionsController extends Controller
         ]);
 
         return response()->json([
-            'permission'  => $permission,
+            'permission' => $permission,
         ]);
     }
 

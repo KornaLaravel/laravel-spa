@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -25,7 +27,7 @@ class ServerInfoController extends Controller
         $pinfo = preg_replace('%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo);
 
         return response()->json([
-            'info'  => $pinfo,
+            'info' => $pinfo,
         ]);
     }
 }

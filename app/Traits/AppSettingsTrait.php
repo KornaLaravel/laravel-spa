@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use App\Models\Setting;
@@ -10,8 +12,7 @@ trait AppSettingsTrait
     /**
      * Process the settings for additional app needs.
      *
-     * @param  \App\Models\Setting  $setting
-     * @return \App\Models\Setting
+     * @return Setting
      */
     public function processSettingForAdditionalAppChanges(Setting $setting)
     {
@@ -216,7 +217,6 @@ trait AppSettingsTrait
     /**
      * Set .env variables directly to the file.
      *
-     * @param  string  $key
      * @param  string|null  $value
      * @param  string|null  $configed
      */
@@ -226,10 +226,19 @@ trait AppSettingsTrait
         $path = app()->environmentFilePath();
         $escaped = preg_quote('='.$term, '/');
 
+        $contents = @file_get_contents($path);
+
+        // file_get_contents() returns false when the .env is missing or
+        // unreadable. Under strict_types that false would reach preg_replace()
+        // as a TypeError instead of the silent no-op it used to be.
+        if ($contents === false) {
+            return;
+        }
+
         file_put_contents($path, preg_replace(
             "/^{$key}{$escaped}/m",
             "{$key}={$value}",
-            file_get_contents($path)
+            $contents
         ));
 
         if (file_exists(\App::getCachedConfigPath())) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -23,7 +25,7 @@ class ActivityLogController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('description', 'like', '%'.$search.'%')
-                    ->orWhere('event', 'like', '%'.$search.'%');
+                        ->orWhere('event', 'like', '%'.$search.'%');
                 });
             })
             ->paginate($perPage);

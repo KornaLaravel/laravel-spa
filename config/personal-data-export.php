@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+use App\Notifications\PersonalDataExportedNotification;
+
 return [
     /*
      * The disk where the exports will be stored by default.
@@ -26,14 +29,14 @@ return [
      * The notification which will be sent to the user when the export
      * has been created.
      */
-    'notification' => \App\Notifications\PersonalDataExportedNotification::class,
+    'notification' => PersonalDataExportedNotification::class,
 
     /*
      * Configure the queue and connection used by `CreatePersonalDataExportJob`
      * which will create the export.
      */
     'job' => [
-        'queue'      => null,
+        'queue' => null,
         'connection' => null,
     ],
 ];

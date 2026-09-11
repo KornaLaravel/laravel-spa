@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\PersonalDataExportJob;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -34,8 +37,7 @@ class UserController extends Controller
     /**
      * Retreive the user by sanctum middleware.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function user(Request $request)
     {
@@ -47,8 +49,7 @@ class UserController extends Controller
     /**
      * Retreive the user by sanctum authtoken.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function userByToken(Request $request)
     {
@@ -67,9 +68,7 @@ class UserController extends Controller
     /**
      * Process request to download user data.
      *
-     * @param  \App\Models\User  $user
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function exportUserPersonalData(User $user, Request $request)
     {
@@ -86,17 +85,15 @@ class UserController extends Controller
         dispatch(new PersonalDataExportJob($currentUser));
 
         return response()->json([
-            'status'    => 'success',
-            'user'      => null,
+            'status' => 'success',
+            'user' => null,
         ]);
     }
 
     /**
      * Delete the users account.
      *
-     * @param  \App\Models\User  $user
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function deleteUserAccount(User $user, Request $request)
     {
@@ -118,8 +115,8 @@ class UserController extends Controller
         $this->guard()->logout();
 
         return response()->json([
-            'status'    => 'success',
-            'user'      => null,
+            'status' => 'success',
+            'user' => null,
         ]);
     }
 }
