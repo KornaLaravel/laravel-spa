@@ -1,8 +1,9 @@
 preset: laravel
 
-enabled:
-  - align_double_arrow
-
+# align_double_arrow was removed when Pint became the formatter for this repo.
+# Pint's laravel preset sets binary_operator_spaces to single_space, so keeping
+# it enabled here made StyleCI and Pint disagree on every aligned => in the
+# codebase and fail the build on ~70 files.
 disabled:
   - unused_use
 
