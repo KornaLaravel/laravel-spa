@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
@@ -34,7 +34,7 @@ jobs:
 #     runs-on: ubuntu-latest
 #     steps:
 #       - run: echo "This PR was approved"
-#       - uses: actions/checkout@v2
+#       - uses: actions/checkout@v5
 #       - name: Deploy to server
 #         uses: appleboy/ssh-action@master
 #         with:
