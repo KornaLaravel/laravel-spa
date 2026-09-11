@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
@@ -8,24 +10,25 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\PersonalDataExport\ExportsPersonalData;
 use Spatie\PersonalDataExport\PersonalDataSelection;
 
 class User extends Authenticatable implements ExportsPersonalData, MustVerifyEmail
 {
-    use HasFactory;
-    use Notifiable;
     use HasApiTokens;
+    use HasFactory;
     use HasRoleAndPermission;
     use LogsActivity;
+    use Notifiable;
     use Prunable;
     use SoftDeletes;
 
@@ -72,9 +75,9 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     protected function casts(): array
     {
         return [
-            'theme_dark'        => 'boolean',
+            'theme_dark' => 'boolean',
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
+            'password' => 'hashed',
         ];
     }
 
@@ -82,12 +85,12 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     {
         $personalData
             ->add('user.json', [
-                'name'              => $this->name,
-                'email'             => $this->email,
-                'theme'             => $this->theme_dark ? 'Dark' : 'Light',
+                'name' => $this->name,
+                'email' => $this->email,
+                'theme' => $this->theme_dark ? 'Dark' : 'Light',
                 'email_verified_at' => $this->email_verified_at,
                 // 'roles'             => $this->getRoles(),
-                'avatar'            => $this->avatar,
+                'avatar' => $this->avatar,
             ]);
         // ->addFile(storage_path("avatars/{$this->id}.jpg"))
         // ->addFile('other-user-data.xml', 's3');
@@ -107,7 +110,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmailNotification());
+        $this->notify(new VerifyEmailNotification);
     }
 
     public function getRolesAttribute()
@@ -133,7 +136,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     /**
      * Get the socialite providers.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function socialiteProviders()
     {
