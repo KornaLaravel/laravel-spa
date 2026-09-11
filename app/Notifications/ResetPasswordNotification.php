@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotificationOriginal;
@@ -17,7 +19,7 @@ class ResetPasswordNotification extends ResetPasswordNotificationOriginal
     {
         $resetUrl = url(config('app.url').'/reset-password/'.$this->token.'?email='.$notifiable->getEmailForPasswordReset());
 
-        return (new MailMessage())
+        return (new MailMessage)
             ->subject(trans('emails.password.request.subject'))
             ->line(trans('emails.password.request.message'))
             ->action(trans('emails.password.request.action'), $resetUrl)

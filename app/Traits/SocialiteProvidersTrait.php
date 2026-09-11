@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
 
 use App\Models\Setting;
@@ -7,6 +9,7 @@ use App\Models\SocialiteProvider;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -16,6 +19,7 @@ use Laravel\Socialite\Facades\Socialite;
 trait SocialiteProvidersTrait
 {
     private $providerSettings;
+
     private $providerConfigs;
 
     public function __construct()
@@ -39,105 +43,88 @@ trait SocialiteProvidersTrait
     protected function setProviderSettings()
     {
         $this->providerSettings = Setting::where('group', 'auth')
-                                ->where(function ($query) {
-                                    $query->where('key', 'enableFbLogin')
-                                            ->orWhere('key', 'appFbId')
-                                            ->orWhere('key', 'appFbSecret')
-                                            ->orWhere('key', 'appFbRedirect')
-
-                                            ->orWhere('key', 'enableTwitterLogin')
-                                            ->orWhere('key', 'appTwitterId')
-                                            ->orWhere('key', 'appTwitterSecret')
-                                            ->orWhere('key', 'appTwitterRedirect')
-
-                                            ->orWhere('key', 'enableGoogleLogin')
-                                            ->orWhere('key', 'appGoogleId')
-                                            ->orWhere('key', 'appGoogleSecret')
-                                            ->orWhere('key', 'appGoogleRedirect')
-
-                                            ->orWhere('key', 'enableGitHubLogin')
-                                            ->orWhere('key', 'appGitHubId')
-                                            ->orWhere('key', 'appGitHubSecret')
-                                            ->orWhere('key', 'appGitHubRedirect')
-
-                                            ->orWhere('key', 'enableTwitchLogin')
-                                            ->orWhere('key', 'appTwitchId')
-                                            ->orWhere('key', 'appTwitchSecret')
-                                            ->orWhere('key', 'appTwitchRedirect')
-
-                                            ->orWhere('key', 'enableInstagramLogin')
-                                            ->orWhere('key', 'appInstagramId')
-                                            ->orWhere('key', 'appInstagramSecret')
-                                            ->orWhere('key', 'appInstagramRedirect')
-
-                                            ->orWhere('key', 'enableYouTubeLogin')
-                                            ->orWhere('key', 'appYouTubeId')
-                                            ->orWhere('key', 'appYouTubeSecret')
-                                            ->orWhere('key', 'appYouTubeRedirect')
-
-                                            ->orWhere('key', 'enableLinkedInLogin')
-                                            ->orWhere('key', 'appLinkedInId')
-                                            ->orWhere('key', 'appLinkedInSecret')
-                                            ->orWhere('key', 'appLinkedInRedirect')
-
-                                            ->orWhere('key', 'enableAppleLogin')
-                                            ->orWhere('key', 'appAppleId')
-                                            ->orWhere('key', 'appAppleSecret')
-                                            ->orWhere('key', 'appAppleRedirect')
-                                            ->orWhere('key', 'appApplePrivateKey')
-                                            ->orWhere('key', 'appAppleTeamId')
-                                            ->orWhere('key', 'appAppleKeyId')
-
-                                            ->orWhere('key', 'enableMicrosoftLogin')
-                                            ->orWhere('key', 'appMicrosoftId')
-                                            ->orWhere('key', 'appMicrosoftSecret')
-                                            ->orWhere('key', 'appMicrosoftRedirect')
-
-                                            ->orWhere('key', 'enableTikTokLogin')
-                                            ->orWhere('key', 'appTikTokId')
-                                            ->orWhere('key', 'appTikTokSecret')
-                                            ->orWhere('key', 'appTikTokRedirect')
-
-                                            ->orWhere('key', 'enableZoHoLogin')
-                                            ->orWhere('key', 'appZoHoId')
-                                            ->orWhere('key', 'appZoHoSecret')
-                                            ->orWhere('key', 'appZoHoRedirect')
-
-                                            ->orWhere('key', 'enableStackExchangeLogin')
-                                            ->orWhere('key', 'appStackExchangeId')
-                                            ->orWhere('key', 'appStackExchangeKey')
-                                            ->orWhere('key', 'appStackExchangeSite')
-                                            ->orWhere('key', 'appStackExchangeSecret')
-                                            ->orWhere('key', 'appStackExchangeRedirect')
-
-                                            ->orWhere('key', 'enableGitLabLogin')
-                                            ->orWhere('key', 'appGitLabId')
-                                            ->orWhere('key', 'appGitLabSecret')
-                                            ->orWhere('key', 'appGitLabRedirect')
-
-                                            ->orWhere('key', 'enableRedditLogin')
-                                            ->orWhere('key', 'appRedditId')
-                                            ->orWhere('key', 'appRedditSecret')
-                                            ->orWhere('key', 'appRedditResponseType')
-                                            ->orWhere('key', 'appRedditState')
-                                            ->orWhere('key', 'appRedditRedirect')
-
-                                            ->orWhere('key', 'enableSnapchatLogin')
-                                            ->orWhere('key', 'appSnapchatId')
-                                            ->orWhere('key', 'appSnapchatSecret')
-                                            ->orWhere('key', 'appSnapchatRedirect')
-
-                                            ->orWhere('key', 'enableMeetupLogin')
-                                            ->orWhere('key', 'appMeetupId')
-                                            ->orWhere('key', 'appMeetupSecret')
-                                            ->orWhere('key', 'appMeetupRedirect')
-
-                                            ->orWhere('key', 'enableAtlassianLogin')
-                                            ->orWhere('key', 'appAtlassianId')
-                                            ->orWhere('key', 'appAtlassianSecret')
-                                            ->orWhere('key', 'appAtlassianRedirect');
-                                    // NEW_PROVIDER_PLUG :: Put New Provider HERE
-                                })->get();
+            ->where(function ($query) {
+                $query->where('key', 'enableFbLogin')
+                    ->orWhere('key', 'appFbId')
+                    ->orWhere('key', 'appFbSecret')
+                    ->orWhere('key', 'appFbRedirect')
+                    ->orWhere('key', 'enableTwitterLogin')
+                    ->orWhere('key', 'appTwitterId')
+                    ->orWhere('key', 'appTwitterSecret')
+                    ->orWhere('key', 'appTwitterRedirect')
+                    ->orWhere('key', 'enableGoogleLogin')
+                    ->orWhere('key', 'appGoogleId')
+                    ->orWhere('key', 'appGoogleSecret')
+                    ->orWhere('key', 'appGoogleRedirect')
+                    ->orWhere('key', 'enableGitHubLogin')
+                    ->orWhere('key', 'appGitHubId')
+                    ->orWhere('key', 'appGitHubSecret')
+                    ->orWhere('key', 'appGitHubRedirect')
+                    ->orWhere('key', 'enableTwitchLogin')
+                    ->orWhere('key', 'appTwitchId')
+                    ->orWhere('key', 'appTwitchSecret')
+                    ->orWhere('key', 'appTwitchRedirect')
+                    ->orWhere('key', 'enableInstagramLogin')
+                    ->orWhere('key', 'appInstagramId')
+                    ->orWhere('key', 'appInstagramSecret')
+                    ->orWhere('key', 'appInstagramRedirect')
+                    ->orWhere('key', 'enableYouTubeLogin')
+                    ->orWhere('key', 'appYouTubeId')
+                    ->orWhere('key', 'appYouTubeSecret')
+                    ->orWhere('key', 'appYouTubeRedirect')
+                    ->orWhere('key', 'enableLinkedInLogin')
+                    ->orWhere('key', 'appLinkedInId')
+                    ->orWhere('key', 'appLinkedInSecret')
+                    ->orWhere('key', 'appLinkedInRedirect')
+                    ->orWhere('key', 'enableAppleLogin')
+                    ->orWhere('key', 'appAppleId')
+                    ->orWhere('key', 'appAppleSecret')
+                    ->orWhere('key', 'appAppleRedirect')
+                    ->orWhere('key', 'appApplePrivateKey')
+                    ->orWhere('key', 'appAppleTeamId')
+                    ->orWhere('key', 'appAppleKeyId')
+                    ->orWhere('key', 'enableMicrosoftLogin')
+                    ->orWhere('key', 'appMicrosoftId')
+                    ->orWhere('key', 'appMicrosoftSecret')
+                    ->orWhere('key', 'appMicrosoftRedirect')
+                    ->orWhere('key', 'enableTikTokLogin')
+                    ->orWhere('key', 'appTikTokId')
+                    ->orWhere('key', 'appTikTokSecret')
+                    ->orWhere('key', 'appTikTokRedirect')
+                    ->orWhere('key', 'enableZoHoLogin')
+                    ->orWhere('key', 'appZoHoId')
+                    ->orWhere('key', 'appZoHoSecret')
+                    ->orWhere('key', 'appZoHoRedirect')
+                    ->orWhere('key', 'enableStackExchangeLogin')
+                    ->orWhere('key', 'appStackExchangeId')
+                    ->orWhere('key', 'appStackExchangeKey')
+                    ->orWhere('key', 'appStackExchangeSite')
+                    ->orWhere('key', 'appStackExchangeSecret')
+                    ->orWhere('key', 'appStackExchangeRedirect')
+                    ->orWhere('key', 'enableGitLabLogin')
+                    ->orWhere('key', 'appGitLabId')
+                    ->orWhere('key', 'appGitLabSecret')
+                    ->orWhere('key', 'appGitLabRedirect')
+                    ->orWhere('key', 'enableRedditLogin')
+                    ->orWhere('key', 'appRedditId')
+                    ->orWhere('key', 'appRedditSecret')
+                    ->orWhere('key', 'appRedditResponseType')
+                    ->orWhere('key', 'appRedditState')
+                    ->orWhere('key', 'appRedditRedirect')
+                    ->orWhere('key', 'enableSnapchatLogin')
+                    ->orWhere('key', 'appSnapchatId')
+                    ->orWhere('key', 'appSnapchatSecret')
+                    ->orWhere('key', 'appSnapchatRedirect')
+                    ->orWhere('key', 'enableMeetupLogin')
+                    ->orWhere('key', 'appMeetupId')
+                    ->orWhere('key', 'appMeetupSecret')
+                    ->orWhere('key', 'appMeetupRedirect')
+                    ->orWhere('key', 'enableAtlassianLogin')
+                    ->orWhere('key', 'appAtlassianId')
+                    ->orWhere('key', 'appAtlassianSecret')
+                    ->orWhere('key', 'appAtlassianRedirect');
+                // NEW_PROVIDER_PLUG :: Put New Provider HERE
+            })->get();
     }
 
     /**
@@ -289,101 +276,101 @@ trait SocialiteProvidersTrait
 
         $providerConfigs = [
             'services.github' => [
-                'client_id'     => $appGitHubId,
+                'client_id' => $appGitHubId,
                 'client_secret' => $appGitHubSecret,
-                'redirect'      => $appGitHubRedirect,
+                'redirect' => $appGitHubRedirect,
             ],
             'services.facebook' => [
-                'client_id'     => $appFbId,
+                'client_id' => $appFbId,
                 'client_secret' => $appFbSecret,
-                'redirect'      => $appFbRedirect,
+                'redirect' => $appFbRedirect,
             ],
             'services.twitter' => [
-                'client_id'     => $appTwitterId,
+                'client_id' => $appTwitterId,
                 'client_secret' => $appTwitterSecret,
-                'redirect'      => $appTwitterRedirect,
+                'redirect' => $appTwitterRedirect,
             ],
             'services.google' => [
-                'client_id'     => $appGoogleId,
+                'client_id' => $appGoogleId,
                 'client_secret' => $appGoogleSecret,
-                'redirect'      => $appGoogleRedirect,
+                'redirect' => $appGoogleRedirect,
             ],
             'services.youtube' => [
-                'client_id'     => $appYouTubeId,
+                'client_id' => $appYouTubeId,
                 'client_secret' => $appYouTubeSecret,
-                'redirect'      => $appYouTubeRedirect,
+                'redirect' => $appYouTubeRedirect,
             ],
             'services.twitch' => [
-                'client_id'     => $appTwitchId,
+                'client_id' => $appTwitchId,
                 'client_secret' => $appTwitchSecret,
-                'redirect'      => $appTwitchRedirect,
+                'redirect' => $appTwitchRedirect,
             ],
             'services.instagram' => [
-                'client_id'     => $appInstagramId,
+                'client_id' => $appInstagramId,
                 'client_secret' => $appInstagramSecret,
-                'redirect'      => $appInstagramRedirect,
+                'redirect' => $appInstagramRedirect,
             ],
             'services.linkedin' => [
-                'client_id'     => $appLinkedInId,
+                'client_id' => $appLinkedInId,
                 'client_secret' => $appLinkedInSecret,
-                'redirect'      => $appLinkedInRedirect,
+                'redirect' => $appLinkedInRedirect,
             ],
             'services.apple' => [
-                'client_id'     => $appAppleId,
+                'client_id' => $appAppleId,
                 'client_secret' => $appAppleSecret,
-                'redirect'      => $appAppleRedirect,
-                'team_id'       => $appAppleTeamId,
-                'key_id'        => $appAppleKeyId,
-                'private_key'   => $appApplePrivateKey,
+                'redirect' => $appAppleRedirect,
+                'team_id' => $appAppleTeamId,
+                'key_id' => $appAppleKeyId,
+                'private_key' => $appApplePrivateKey,
             ],
             'services.microsoft' => [
-                'client_id'     => $appMicrosoftId,
+                'client_id' => $appMicrosoftId,
                 'client_secret' => $appMicrosoftSecret,
-                'redirect'      => $appMicrosoftRedirect,
+                'redirect' => $appMicrosoftRedirect,
             ],
             'services.tiktok' => [
-                'client_id'     => $appTikTokId,
+                'client_id' => $appTikTokId,
                 'client_secret' => $appTikTokSecret,
-                'redirect'      => $appTikTokRedirect,
+                'redirect' => $appTikTokRedirect,
             ],
             'services.zoho' => [
-                'client_id'     => $appZoHoId,
+                'client_id' => $appZoHoId,
                 'client_secret' => $appZoHoSecret,
-                'redirect'      => $appZoHoRedirect,
+                'redirect' => $appZoHoRedirect,
             ],
             'services.stackexchange' => [
-                'client_id'     => $appStackExchangeId,
+                'client_id' => $appStackExchangeId,
                 'client_secret' => $appStackExchangeSecret,
-                'redirect'      => $appStackExchangeRedirect,
-                'key'           => $appStackExchangeKey,
-                'site'          => $appStackExchangeSite,
+                'redirect' => $appStackExchangeRedirect,
+                'key' => $appStackExchangeKey,
+                'site' => $appStackExchangeSite,
             ],
             'services.gitlab' => [
-                'client_id'     => $appGitLabId,
+                'client_id' => $appGitLabId,
                 'client_secret' => $appGitLabSecret,
-                'redirect'      => $appGitLabRedirect,
+                'redirect' => $appGitLabRedirect,
             ],
             'services.reddit' => [
-                'client_id'     => $appRedditId,
+                'client_id' => $appRedditId,
                 'client_secret' => $appRedditSecret,
                 'response_type' => $appRedditResponseType,
-                'state'         => $appRedditState,
-                'redirect'      => $appRedditRedirect,
+                'state' => $appRedditState,
+                'redirect' => $appRedditRedirect,
             ],
             'services.snapchat' => [
-                'client_id'     => $appSnapchatId,
+                'client_id' => $appSnapchatId,
                 'client_secret' => $appSnapchatSecret,
-                'redirect'      => $appSnapchatRedirect,
+                'redirect' => $appSnapchatRedirect,
             ],
             'services.meetup' => [
-                'client_id'     => $appMeetupId,
+                'client_id' => $appMeetupId,
                 'client_secret' => $appMeetupSecret,
-                'redirect'      => $appMeetupRedirect,
+                'redirect' => $appMeetupRedirect,
             ],
             'services.atlassian' => [
-                'client_id'     => $appAtlassianId,
+                'client_id' => $appAtlassianId,
                 'client_secret' => $appAtlassianSecret,
-                'redirect'      => $appAtlassianRedirect,
+                'redirect' => $appAtlassianRedirect,
             ],
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
@@ -431,24 +418,24 @@ trait SocialiteProvidersTrait
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
         return [
-            'facebook'          => $enableFbLogin,
-            'twitter'           => $enableTwitterLogin,
-            'google'            => $enableGoogleLogin,
-            'instagram'         => $enableInstagramLogin,
-            'github'            => $enableGitHubLogin,
-            'youtube'           => $enableYouTubeLogin,
-            'linkedin'          => $enableLinkedInLogin,
-            'twitch'            => $enableTwitchLogin,
-            'apple'             => $enableAppleLogin,
-            'microsoft'         => $enableMicrosoftLogin,
-            'tiktok'            => $enableTikTokLogin,
-            'zoho'              => $enableZoHoLogin,
-            'stackexchange'     => $enableStackExchangeLogin,
-            'gitlab'            => $enableGitLabLogin,
-            'reddit'            => $enableRedditLogin,
-            'snapchat'          => $enableSnapchatLogin,
-            'meetup'            => $enableMeetupLogin,
-            'atlassian'         => $enableAtlassianLogin,
+            'facebook' => $enableFbLogin,
+            'twitter' => $enableTwitterLogin,
+            'google' => $enableGoogleLogin,
+            'instagram' => $enableInstagramLogin,
+            'github' => $enableGitHubLogin,
+            'youtube' => $enableYouTubeLogin,
+            'linkedin' => $enableLinkedInLogin,
+            'twitch' => $enableTwitchLogin,
+            'apple' => $enableAppleLogin,
+            'microsoft' => $enableMicrosoftLogin,
+            'tiktok' => $enableTikTokLogin,
+            'zoho' => $enableZoHoLogin,
+            'stackexchange' => $enableStackExchangeLogin,
+            'gitlab' => $enableGitLabLogin,
+            'reddit' => $enableRedditLogin,
+            'snapchat' => $enableSnapchatLogin,
+            'meetup' => $enableMeetupLogin,
+            'atlassian' => $enableAtlassianLogin,
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
@@ -457,7 +444,6 @@ trait SocialiteProvidersTrait
     /**
      * Find or create a user.
      *
-     * @param  string  $provider
      * @param  SocialiteUser  $user
      * @return App\Models\User
      */
@@ -486,7 +472,7 @@ trait SocialiteProvidersTrait
             }
             if ($existingUser && $existingUser->id && $oauthProvider && $oauthProvider->user_id && ($existingUser->id != $oauthProvider->user_id)) {
                 return [
-                    'user'  => null,
+                    'user' => null,
                     'token' => null,
                 ];
             }
@@ -494,7 +480,7 @@ trait SocialiteProvidersTrait
 
         if ($oauthProvider) {
             return [
-                'user'  => $oauthProvider->user,
+                'user' => $oauthProvider->user,
                 'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
             ];
         }
@@ -510,13 +496,13 @@ trait SocialiteProvidersTrait
         if ($existingUser && $oauthProvider) {
             if ($provider != 'twitter') {
                 $oauthProvider->update([
-                    'access_token'  => $user->token ? $user->token : null,
+                    'access_token' => $user->token ? $user->token : null,
                     'refresh_token' => $user->refreshToken ? $user->refreshToken : null,
                 ]);
             }
 
             return [
-                'user'  => $oauthProvider->user,
+                'user' => $oauthProvider->user,
                 'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
             ];
         }
@@ -525,7 +511,7 @@ trait SocialiteProvidersTrait
         $token = $user->createToken($provider.'-token')->plainTextToken;
 
         return [
-            'user'  => $user,
+            'user' => $user,
             'token' => $token,
         ];
     }
@@ -533,8 +519,6 @@ trait SocialiteProvidersTrait
     /**
      * Create a new user.
      *
-     * @param  string  $provider
-     * @param  $sUser
      * @return App\Models\User
      */
     protected function updateOrCreateUser(string $provider, $sUser, $existingUser = null): User
@@ -581,9 +565,9 @@ trait SocialiteProvidersTrait
             }
 
             $user = User::create([
-                'name'              => $name,
-                'email'             => $email,
-                'password'          => bcrypt(str_random(50)),
+                'name' => $name,
+                'email' => $email,
+                'password' => bcrypt(str_random(50)),
             ]);
 
             $user->attachRole(config('roles.models.role')::whereName('User')->first());
@@ -597,11 +581,11 @@ trait SocialiteProvidersTrait
         }
 
         $this->addSocialiteProviderToUser($user, [
-            'provider'          => $provider,
-            'provider_user_id'  => $pid,
-            'access_token'      => $token,
-            'refresh_token'     => $refreshToken,
-            'avatar'            => $avatar,
+            'provider' => $provider,
+            'provider_user_id' => $pid,
+            'access_token' => $token,
+            'refresh_token' => $refreshToken,
+            'avatar' => $avatar,
         ]);
 
         return $user;
@@ -610,30 +594,29 @@ trait SocialiteProvidersTrait
     /**
      * Update or Create a Socialite Provider.
      *
-     * @param  \App\Models\User  $user  [description]
+     * @param  User  $user  [description]
      * @param  array  $data
-     * @return \App\Models\SocialiteProvider
      */
     protected function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
     {
         $provider = SocialiteProvider::where('user_id', $user->id)
-                                ->where('provider', $data['provider'])
-                                ->where('provider_user_id', $data['provider_user_id'])->first();
+            ->where('provider', $data['provider'])
+            ->where('provider_user_id', $data['provider_user_id'])->first();
 
         if ($provider) {
             return $provider->update([
-                'access_token'      => $data['access_token'],
-                'refresh_token'     => $data['refresh_token'],
-                'avatar'            => $data['avatar'],
+                'access_token' => $data['access_token'],
+                'refresh_token' => $data['refresh_token'],
+                'avatar' => $data['avatar'],
             ]);
         }
 
         return $user->socialiteProviders()->create([
-            'provider'          => $data['provider'],
-            'provider_user_id'  => $data['provider_user_id'],
-            'access_token'      => $data['access_token'],
-            'refresh_token'     => $data['refresh_token'],
-            'avatar'            => $data['avatar'],
+            'provider' => $data['provider'],
+            'provider_user_id' => $data['provider_user_id'],
+            'access_token' => $data['access_token'],
+            'refresh_token' => $data['refresh_token'],
+            'avatar' => $data['avatar'],
         ]);
     }
 
@@ -652,7 +635,7 @@ trait SocialiteProvidersTrait
      * Cache the current state and modify the url with a random string to be the key for the return user.
      * Not all providers return the state and this will allow us to do so..
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     protected function cacheStatePutKeyInUrl($url = null, $state = null)

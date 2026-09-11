@@ -1,13 +1,13 @@
 <template>
-  <div class="mx-auto max-w-screen-md text-gray-900">
+  <div class="mx-auto max-w-(--breakpoint-md) text-gray-900">
     <div class="flex justify-center">
       <div class="flex-1">
-        <div class="w-auto border rounded">
+        <div class="w-auto border rounded-sm">
           <div class="border-b p-4 font-semibold text-gray-700">
             {{ $t('reset_your_password') }}
           </div>
           <div class="p-4">
-            <div v-if="success" class="mx-auto text-center py-6 bg-green-500 rounded border-0 text-white relative">
+            <div v-if="success" class="mx-auto text-center py-6 bg-green-500 rounded-sm border-0 text-white relative">
               <span class="absolute top-2 right-2 cursor-pointer font-bold" @click="dismissSuccess">
                 <XMarkIcon class="h-5 w-5" />
               </span>
@@ -38,7 +38,7 @@
                       'border-red-500': validationErrors?.email,
                     }"
                     :disabled="processing.value"
-                    class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none"
+                    class="mt-3 w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-hidden"
                     autofocus
                   />
                   <div v-if="validationErrors?.email" class="absolute">
@@ -54,7 +54,7 @@
                     :loading="processing.value"
                     :disabled="processing.value || success"
                     :text="processing.value ? 'Send Email' : 'Send Email'"
-                    btn-class="uppercase leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+                    btn-class="uppercase leading-snug inline-block rounded-sm bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-hidden focus:ring-0 active:bg-indigo-800 active:shadow-lg "
                     type="submit"
                   >
                     <template #text>

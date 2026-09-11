@@ -37,7 +37,7 @@
           v-model="item.name"
           v-tippy="'Edit Permission Name'"
           type="text"
-          class="rounded border-0 bg-transparent text-sm"
+          class="rounded-sm border-0 bg-transparent text-sm"
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('name', item)"
@@ -48,7 +48,7 @@
           v-model="item.slug"
           v-tippy="'Edit Permission Slug'"
           type="text"
-          class="rounded border-0 bg-transparent text-sm"
+          class="rounded-sm border-0 bg-transparent text-sm"
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('slug', item)"
@@ -59,7 +59,7 @@
           v-model="item.description"
           v-tippy="'Edit Permission Description'"
           type="text"
-          class="rounded border-0 bg-transparent text-sm"
+          class="rounded-sm border-0 bg-transparent text-sm"
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('description', item)"
@@ -79,7 +79,7 @@
         <div class="text-nowrap">
           <AppButton
             :loading="!dataReady"
-            class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
+            class="mr-2 inline-block rounded-sm px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-hidden focus:ring-0 active:shadow-lg dark:text-white"
             :btn-class="
               locked(item)
                 ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'

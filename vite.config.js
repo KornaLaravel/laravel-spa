@@ -1,35 +1,22 @@
-import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
-import laravel, { refreshPaths } from 'laravel-vite-plugin';
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
-import path, { resolve, dirname } from 'path';
 import tailwindcss from '@tailwindcss/vite';
+import legacy from '@vitejs/plugin-legacy';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { imagetools } from 'vite-imagetools';
-import { manualChunksPlugin } from 'vite-plugin-webpackchunkname';
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import { ViteMinifyPlugin } from 'vite-plugin-minify';
-import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
-import legacy from '@vitejs/plugin-legacy';
-import viteEsLintPlugin from 'vite-plugin-eslint';
-import StylelintPlugin from 'vite-plugin-stylelint';
-import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
+
+const resolvePath = (path) => fileURLToPath(new URL(path, import.meta.url));
 
 export default defineConfig({
-  optimizeDeps: {
-    force: true,
-    esbuildOptions: {
-      plugins: [esbuildCommonjs()],
-    },
-  },
   plugins: [
     laravel({
       input: ['resources/css/app.css', 'resources/js/app.js'],
-      reactivityTransform: true,
       refresh: true,
     }),
     vue({
-      reactivityTransform: true,
       template: {
         transformAssetUrls: {
           base: null,
@@ -37,16 +24,20 @@ export default defineConfig({
         },
       },
     }),
-    // tailwindcss(),
+    tailwindcss(),
     viteStaticCopy({
+      // stripBase keeps these flat in public/. Without it vite-plugin-static-copy
+      // v4 preserves the source tree and writes them to public/resources/.
       targets: [
         {
           src: 'resources/img/favicon/*',
           dest: '../',
+          rename: { stripBase: true },
         },
         {
           src: 'resources/pwa/*',
           dest: '../',
+          rename: { stripBase: true },
         },
       ],
     }),
@@ -62,38 +53,10 @@ export default defineConfig({
       polyfills: true,
     }),
     manifestSRI(),
-    createHtmlPlugin({
-      minify: true,
-      entry: path.resolve(__dirname, 'resources/js/app.js'),
-    }),
-    ViteMinifyPlugin({
-      minifyCSS: true,
-      removeComments: true,
-    }),
-    StylelintPlugin({
-      fix: true,
-      quite: false,
-      lintOnStart: true,
-    }),
-    viteEsLintPlugin({
-      include: '/.(js|vue)$/',
-      cache: true,
-      fix: true,
-      lintOnStart: false,
-      emitWarning: true,
-      emitError: true,
-      failOnWarning: false,
-      failOnError: true,
-    }),
-    viteCommonjs(),
-    splitVendorChunkPlugin(),
-    manualChunksPlugin(),
   ],
   build: {
     reportCompressedSize: true,
     chunkSizeWarningLimit: 1600,
-    // manifest: "manifest.json",
-    // sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -113,36 +76,41 @@ export default defineConfig({
     modulePreload: {
       polyfill: true,
     },
-    commonjsOptions: {
-      include: [/node_modules/],
+  },
+  css: {
+    // Vite 8 processes CSS with Lightning CSS, which is stricter than the old
+    // esbuild pipeline. vue3-easy-data-table ships var() references that are
+    // missing the leading "--", so recover from those rather than hard failing.
+    lightningcss: {
+      errorRecovery: true,
     },
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, 'node_modules'),
-      '@': path.resolve(__dirname, 'resources/js'),
-      '@css': path.resolve(__dirname, 'resources/css'),
-      '@img': path.resolve(__dirname, 'resources/img'),
-      '@views': path.resolve(__dirname, 'resources/js/views'),
-      '@pages': path.resolve(__dirname, 'resources/js/views/pages'),
-      '@layouts': path.resolve(__dirname, 'resources/js/layouts'),
-      '@kiosk': path.resolve(__dirname, 'resources/js/views/kiosk'),
-      '@home': path.resolve(__dirname, 'resources/js/views/home'),
-      '@admin': path.resolve(__dirname, 'resources/js/views/admin'),
-      '@auth': path.resolve(__dirname, 'resources/js/views/auth'),
-      '@errors': path.resolve(__dirname, 'resources/js/views/errors'),
-      '@login': path.resolve(__dirname, 'resources/js/views/login'),
-      '@misc': path.resolve(__dirname, 'resources/js/views/misc'),
-      '@posts': path.resolve(__dirname, 'resources/js/views/posts'),
-      '@category': path.resolve(__dirname, 'resources/js/views/category'),
-      '@register': path.resolve(__dirname, 'resources/js/views/register'),
-      '@store': path.resolve(__dirname, 'resources/js/store'),
-      '@services': path.resolve(__dirname, 'resources/js/services'),
-      '@router': path.resolve(__dirname, 'resources/js/router'),
-      '@routes': path.resolve(__dirname, 'resources/js/routes'),
-      '@components': path.resolve(__dirname, 'resources/js/components'),
-      '@composables': path.resolve(__dirname, 'resources/js/composables'),
-      vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
+      '~': resolvePath('./node_modules'),
+      '@': resolvePath('./resources/js'),
+      '@css': resolvePath('./resources/css'),
+      '@img': resolvePath('./resources/img'),
+      '@views': resolvePath('./resources/js/views'),
+      '@pages': resolvePath('./resources/js/views/pages'),
+      '@layouts': resolvePath('./resources/js/layouts'),
+      '@kiosk': resolvePath('./resources/js/views/kiosk'),
+      '@home': resolvePath('./resources/js/views/home'),
+      '@admin': resolvePath('./resources/js/views/admin'),
+      '@auth': resolvePath('./resources/js/views/auth'),
+      '@errors': resolvePath('./resources/js/views/errors'),
+      '@login': resolvePath('./resources/js/views/login'),
+      '@misc': resolvePath('./resources/js/views/misc'),
+      '@posts': resolvePath('./resources/js/views/posts'),
+      '@category': resolvePath('./resources/js/views/category'),
+      '@register': resolvePath('./resources/js/views/register'),
+      '@store': resolvePath('./resources/js/store'),
+      '@services': resolvePath('./resources/js/services'),
+      '@router': resolvePath('./resources/js/router'),
+      '@routes': resolvePath('./resources/js/routes'),
+      '@components': resolvePath('./resources/js/components'),
+      '@composables': resolvePath('./resources/js/composables'),
+      vue: resolvePath('./node_modules/vue/dist/vue.esm-bundler.js'),
     },
   },
 });

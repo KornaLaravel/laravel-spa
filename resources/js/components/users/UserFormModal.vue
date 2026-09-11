@@ -25,7 +25,7 @@
               type="text"
               placeholder="Name"
               name="name"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.name
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
@@ -33,7 +33,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
             >
               <span class="fas fa-user" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -48,7 +48,7 @@
               type="text"
               placeholder="E-mail"
               name="email"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.email
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
@@ -56,7 +56,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-envelope" :class="errors && errors.email ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -72,7 +72,7 @@
               placeholder="Password"
               name="password"
               autocomplete="on"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.password
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
@@ -80,7 +80,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -96,7 +96,7 @@
               placeholder="Password Confirmation"
               name="password_confirmation"
               autocomplete="on"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.password
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
@@ -104,7 +104,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -142,7 +142,7 @@
                 <SwitchComp
                   :default-checked="form.theme_dark"
                   :class="form.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
-                  class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 float-left"
+                  class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75 float-left"
                   style="margin-top: 5px"
                 >
                   <span class="sr-only">Toggle Theme</span>

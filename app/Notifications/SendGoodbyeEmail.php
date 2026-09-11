@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -36,11 +38,11 @@ class SendGoodbyeEmail extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        $message = new MailMessage();
+        $message = new MailMessage;
         $message->subject(trans('emails.goodbye.subject'))
             ->greeting(trans('emails.goodbye.greeting'), ['username' => \Auth::User()->name])
             ->line(trans('emails.goodbye.message'))

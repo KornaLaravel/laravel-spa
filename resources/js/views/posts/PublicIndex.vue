@@ -3,7 +3,7 @@
     <h2 class="text-center my-4">Blog Posts</h2>
     <div class="row mb-2">
       <div v-for="post in posts?.data" :key="post.id" class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="row g-0 border rounded-sm overflow-hidden flex-md-row mb-4 shadow-xs h-md-250 position-relative">
           <div class="col-auto d-none d-lg-block d-md-block">
             <img :src="getImageUrl(post)" class="img-fluid" />
           </div>

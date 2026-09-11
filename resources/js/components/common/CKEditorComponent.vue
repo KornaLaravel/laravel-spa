@@ -1,26 +1,30 @@
 <template>
-  <CKEditor v-model="editorData" :editor="ClassicEditor" :model-value="props.modelValue" :config="editorConfig" />
+  <Ckeditor v-model="editorData" :editor="ClassicEditor" :config="editorConfig" />
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onMounted, watch, reactive, ref } from 'vue';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
+import { ref, watch } from 'vue';
+import { Ckeditor } from '@ckeditor/ckeditor5-vue';
+import { BlockQuote, Bold, ClassicEditor, Essentials, Heading, Italic, Link, List, Paragraph } from 'ckeditor5';
+import 'ckeditor5/ckeditor5.css';
+
 const props = defineProps({
   modelValue: String,
 });
 const editorData = ref(props.modelValue || '');
-const appName = computed(() => {
-  return APP_NAME;
-});
-const ckeKey = computed(() => {
-  return CK_EDITOR_KEY;
-});
 const emit = defineEmits(['update:modelValue']);
 
+// CKEditor 5 requires a license key from v44 onwards. "GPL" selects the
+// open source licence when no commercial key is configured. CK_EDITOR_KEY is a
+// global declared by the Blade layout, not a module import, so it is read
+// through typeof: a bare reference throws a ReferenceError if this component is
+// ever mounted on a page that does not declare it.
+const licenseKey = typeof CK_EDITOR_KEY === 'string' && CK_EDITOR_KEY ? CK_EDITOR_KEY : 'GPL';
+
 const editorConfig = ref({
+  licenseKey,
+  plugins: [BlockQuote, Bold, Essentials, Heading, Italic, Link, List, Paragraph],
   toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-  licenseKey: ckeKey,
   heading: {
     options: [
       { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
@@ -40,13 +44,18 @@ const editorConfig = ref({
   },
 });
 
-onMounted(() => {
-  //
-});
-
 watch(editorData, () => {
   emit('update:modelValue', editorData.value);
 });
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (value !== editorData.value) {
+      editorData.value = value || '';
+    }
+  },
+);
 </script>
 
 <style>

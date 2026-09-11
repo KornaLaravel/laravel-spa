@@ -1,11 +1,11 @@
 <template>
-  <client-only>
-    <umo-editor v-bind="options" />
-  </client-only>
+  <UmoEditor v-bind="options" />
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { UmoEditor } from '@umoteam/editor';
+import '@umoteam/editor/style';
 
 const options = ref({
   theme: 'light',

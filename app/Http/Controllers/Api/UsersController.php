@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -92,11 +94,11 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'name'              => $validated['name'],
-            'email'             => $validated['email'],
-            'theme_dark'        => $validated['theme_dark'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'theme_dark' => $validated['theme_dark'],
             'email_verified_at' => $email_verified_at,
-            'password'          => Hash::make($validated['password']),
+            'password' => Hash::make($validated['password']),
         ]);
 
         if ($user) {
@@ -108,7 +110,7 @@ class UsersController extends Controller
             // event(new Registered($user));
 
             return response()->json([
-                'user'  => $user,
+                'user' => $user,
             ]);
         }
     }
@@ -149,7 +151,7 @@ class UsersController extends Controller
         // $user->syncPermissions($request->validated('permissions'));
 
         return response()->json([
-            'user'  => $user,
+            'user' => $user,
         ]);
     }
 

@@ -74,7 +74,7 @@ export default {
           hover:border-indigo-900
           dark:border-indigo-600
           dark:hover:border-indigo-400
-          border-1
+          border
           border
         `;
       } else if (this.secondary) {
@@ -89,7 +89,7 @@ export default {
           hover:border-slate-900
           dark:border-slate-600
           dark:hover:border-slate-400
-          border-1
+          border
           border
         `;
       } else if (this.info) {
@@ -104,7 +104,7 @@ export default {
           hover:border-blue-900
           dark:border-blue-600
           dark:hover:border-blue-400
-          border-1
+          border
           border
         `;
       } else if (this.accent) {
@@ -119,7 +119,7 @@ export default {
           hover:border-teal-900
           dark:border-teal-600
           dark:hover:border-teal-400
-          border-1
+          border
           border
         `;
       } else if (this.success) {
@@ -134,7 +134,7 @@ export default {
           hover:border-green-900
           dark:border-green-600
           dark:hover:border-green-400
-          border-1
+          border
           border
         `;
       } else if (this.warning) {
@@ -149,7 +149,7 @@ export default {
           hover:border-yellow-900
           dark:border-yellow-600
           dark:hover:border-yellow-400
-          border-1
+          border
           border
         `;
       } else if (this.danger) {
@@ -164,7 +164,7 @@ export default {
           hover:border-red-900
           dark:border-red-600
           dark:hover:border-red-400
-          border-1
+          border
           border
         `;
       } else if (this.transparent) {

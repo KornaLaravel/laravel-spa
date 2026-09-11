@@ -1,19 +1,67 @@
-@import '@css/normalize.css';
+/* Imported into the base layer on purpose. This file is normalize.css plus ~40
+   hardcoded copies of Tailwind v1-era utilities (.bg-white, .text-sm, .h-5,
+   .dark\:bg-gray-800 ...). Tailwind v4 emits its utilities inside a real
+   @layer utilities, and unlayered CSS beats any layered CSS regardless of
+   specificity - so leaving this unlayered would let those stale copies override
+   every matching Tailwind utility. v3 emitted utilities unlayered, where
+   Tailwind won on source order and specificity. layer(base) restores that. */
+@import './normalize.css' layer(base);
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
-@import '~/tippy.js/dist/tippy.css';
-@import '~/tippy.js/themes/material.css';
-@import '~/tippy.js/animations/perspective.css';
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/themes/material.css';
+@import 'tippy.js/animations/perspective.css';
+/* Tailwind is imported in its three parts rather than as a single
+   @import 'tailwindcss' so that UTILITIES stay UNLAYERED.
+   v4's default wraps utilities in @layer utilities, and unlayered CSS beats
+   layered CSS no matter the specificity - which would let the ~40 hardcoded
+   Tailwind v1-era utility copies further down this file (.bg-white,
+   .text-gray-900, ...) silently override every matching Tailwind utility, and
+   would break every dark: variant on an element that also carries a plain
+   colour utility. v3 emitted utilities unlayered, so this preserves the
+   pre-upgrade cascade exactly. */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
 
-/*@import "tailwindcss";
-@import "tailwindcss/theme.css";
-@import "tailwindcss/preflight.css" ;
-@import "tailwindcss/utilities.css";*/
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Sources that automatic content detection cannot reach because they are
+   gitignored (vendor, compiled views) or live outside this stylesheet's tree. */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.{js,ts,vue}';
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* Dark mode is toggled by setting the "dark" class on <html>
+   (see resources/js/composables/darkmode.js).
+   Written as a descendant selector rather than the :where() form from the v4
+   docs on purpose: :where() contributes no specificity, so dark:bg-* would lose
+   to the plain .bg-* rules that normalize.css and the app CSS below define after
+   Tailwind's output. Tailwind v3's darkMode:'class' emitted ".dark .dark\:bg-*"
+   for the same reason, so this keeps the pre-upgrade cascade. */
+@custom-variant dark (.dark &);
+
+@theme {
+  --font-sans:
+    Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+  --color-primary: #0fa968;
+  --color-primary-50: #ecfdf3;
+  --color-primary-100: #d1fae1;
+  --color-primary-200: #a7f3c9;
+  --color-primary-300: #6ee7ac;
+  --color-primary-400: #34d38b;
+  --color-primary-500: #0fa968;
+  --color-primary-600: #05965c;
+  --color-primary-700: #04784c;
+  --color-primary-800: #065f3e;
+  --color-primary-900: #064e34;
+
+  --color-background: #e5e5e5;
+  --color-surface: #ffffff;
+}
 
 .quicksand-font {
   font-family: 'Quicksand', serif;
@@ -445,14 +493,18 @@ video {
   }
 }*/
 
-@layer base {
-  .border,
-  .border-b,
-  .border-t,
-  .border-l,
-  .border-r {
-    @apply border-gray-200 dark:border-gray-700;
-  }
+/* Deliberately NOT wrapped in @layer base. In v3 @layer base was a Tailwind
+   directive whose contents were hoisted out as plain CSS, so these selectors
+   (0,1,0) beat the `*, :after, :before { border: 0 solid #e2e8f0 }` reset above
+   (0,0,0). In v4 @layer base is a real cascade layer, and unlayered CSS beats
+   any layer regardless of specificity - which made this rule dead and pinned
+   every bordered element to #e2e8f0 in dark mode. */
+.border,
+.border-b,
+.border-t,
+.border-l,
+.border-r {
+  @apply border-gray-200 dark:border-gray-700;
 }
 
 .text-nowrap {
@@ -493,40 +545,40 @@ video {
 .dark .swal2-popup.swal2-toast .swal2-success [class^='swal2-success-circular-line'][class$='left'],
 .dark .swal2-popup.swal2-toast .swal2-error [class^='swal2-error-circular-line'][class$='right'],
 .dark .swal2-popup.swal2-toast .swal2-error [class^='swal2-error-circular-line'][class$='left'] {
-  @apply bg-slate-900 !important;
+  @apply bg-slate-900!;
 }
 .dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-title {
-  @apply text-green-500 !important;
+  @apply text-green-500!;
 }
 .dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-timer-progress-bar {
-  @apply bg-green-500 !important;
+  @apply bg-green-500!;
 }
 .dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-title {
-  @apply text-red-500 !important;
+  @apply text-red-500!;
 }
 .dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-timer-progress-bar {
-  @apply bg-red-500 !important;
+  @apply bg-red-500!;
 }
 
 /*Vue Tables 3 overrides*/
 .VueTables.VueTables--client {
-  /*@apply p-0 rounded shadow;*/
+  /*@apply p-0 rounded-sm shadow-sm;*/
 }
 .VueTables .VueTables__search {
-  @apply mb-3 rounded border py-2 px-2 text-gray-600 shadow dark:text-gray-200;
+  @apply mb-3 rounded-sm border py-2 px-2 text-gray-600 shadow-sm dark:text-gray-200;
 }
 .VueTables .VueTables__search .VueTables__search__input {
-  @apply ml-3 rounded border-0 bg-gray-200 text-sm text-gray-600 shadow dark:bg-slate-900 dark:text-gray-200;
+  @apply ml-3 rounded-sm border-0 bg-gray-200 text-sm text-gray-600 shadow-sm dark:bg-slate-900 dark:text-gray-200;
 }
 .VueTables .table-responsive.VueTables__wrapper {
-  @apply rounded border-0 bg-gray-50 shadow dark:bg-slate-700;
+  @apply rounded-sm border-0 bg-gray-50 shadow-sm dark:bg-slate-700;
 }
 .VueTables .table-responsive {
   overflow: hidden !important;
   overflow-x: auto !important;
 }
 .VueTables table {
-  @apply w-full rounded;
+  @apply w-full rounded-sm;
 }
 .VueTables .table-responsive.VueTables__wrapper tr,
 .VueTables .table-responsive.VueTables__wrapper th,
@@ -534,7 +586,7 @@ video {
   @apply border-0 bg-transparent;
 }
 .VueTables .table-responsive.VueTables__wrapper th {
-  @apply bg-transparent px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider !important;
+  @apply bg-transparent! px-5! py-3! text-left! text-xs! font-semibold! uppercase! tracking-wider!;
   white-space: nowrap;
 }
 .VueTables .table-responsive.VueTables__wrapper thead tr {
@@ -602,7 +654,7 @@ video {
 }
 .php-info table:first-of-type .h td,
 .php-info table:first-of-type .h th {
-  @apply rounded;
+  @apply rounded-sm;
 }
 .php-info .h td .p {
   line-height: 2;
@@ -865,4 +917,30 @@ video {
 
 .vs__dropdown-toggle .vs__selected .vs__deselect {
   @apply bg-gray-100 rounded-full p-1 ml-2;
+}
+
+/* Moved here from resources/js/components/common/PaginationComp.vue.
+   The block was global (never scoped), and Tailwind v4 does not process @apply
+   inside an SFC <style lang="scss"> block - the directives shipped verbatim to
+   the browser and the component rendered unstyled. app.css is compiled by
+   Tailwind, so @apply resolves here. Uses native CSS nesting instead of SCSS. */
+.vue-pagination {
+  .pagination-container {
+    @apply flex;
+    column-gap: 5px;
+  }
+
+  .paginate-buttons {
+    height: 40px;
+    width: 40px;
+    @apply cursor-pointer rounded-sm bg-gray-100 text-black dark:bg-gray-900 dark:text-white;
+
+    &:hover {
+      @apply bg-gray-300 dark:bg-gray-700;
+    }
+
+    &.active-page {
+      @apply cursor-default bg-blue-300 text-white hover:bg-blue-300 dark:bg-blue-800 dark:hover:bg-blue-800;
+    }
+  }
 }

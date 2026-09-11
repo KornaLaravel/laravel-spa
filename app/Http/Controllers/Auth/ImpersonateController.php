@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -7,11 +9,14 @@ use App\Http\Requests\Users\ImpersonateUserRequest;
 use App\Http\Requests\Users\LeaveImpersonateUserRequest;
 use App\Models\Impersonation;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class ImpersonateController extends Controller
 {
     public const IMPERSONATOR_TOKEN = 'IMPERSONATOR token';
+
     public const IMPERSONATION_TOKEN = 'IMPERSONATION token';
 
     public function __construct()
@@ -28,9 +33,7 @@ class ImpersonateController extends Controller
     /**
      * Impersonate a user, store the token for returning.
      *
-     * @param  \App\Http\Requests\Users\ImpersonateUserRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function impersonate(ImpersonateUserRequest $request, User $user)
     {
@@ -49,29 +52,29 @@ class ImpersonateController extends Controller
         $impersonateeToken = $impersonatee->createToken(ImpersonateController::IMPERSONATION_TOKEN);
 
         $impersonation = Impersonation::create([
-            'user_id'                   => $impersonator->id,
-            'personal_access_token_id'  => $impersonateeToken->accessToken->id,
+            'user_id' => $impersonator->id,
+            'personal_access_token_id' => $impersonateeToken->accessToken->id,
         ]);
 
         // $this->logoutUser($impersonator);
 
         $data = [
             'impersonatorToken' => $impersonatorToken,
-            'token'             => $impersonateeToken->plainTextToken,
+            'token' => $impersonateeToken->plainTextToken,
         ];
 
         return response()->json([
-            'code'      => 200,
-            'message'   => 'Here is the data you seek, use it wisely.',
-            'data'      => $data,
+            'code' => 200,
+            'message' => 'Here is the data you seek, use it wisely.',
+            'data' => $data,
         ], 200);
     }
 
     /**
      * Leave impersonating a user.
      *
-     * @param  \App\Http\Requests\Users\ImpersonateUserRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  ImpersonateUserRequest  $request
+     * @return Response
      */
     public function leaveImpersonate(LeaveImpersonateUserRequest $request)
     {
@@ -91,20 +94,20 @@ class ImpersonateController extends Controller
         $impersonatedUser->tokens()->delete();
 
         $data = [
-            'token'         => $impersonatorToken,
+            'token' => $impersonatorToken,
         ];
 
         return response()->json([
-            'code'      => 200,
-            'message'   => 'Welcome back after your journey down the rabit hole.',
-            'data'      => $data,
+            'code' => 200,
+            'message' => 'Welcome back after your journey down the rabit hole.',
+            'data' => $data,
         ], 200);
     }
 
     /**
      * Logout a user herlper function.
      *
-     * @param  \App\Models\User  $user
+     * @param  User  $user
      * @return void
      */
     public function logoutUser($user)
@@ -118,7 +121,7 @@ class ImpersonateController extends Controller
      * Access the web guard middleware.
      *
      * @param  string  $guard
-     * @return App\Http\Kernel::middlewareGroups['web']
+     * @return RedirectResponse
      */
     public function guard($guard = 'web')
     {

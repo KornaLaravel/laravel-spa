@@ -21,7 +21,6 @@ import i18n from './plugins/i18n';
 import VueAwesomePaginate from 'vue-awesome-paginate';
 import VueSecureHTML from 'vue-html-secure';
 import * as Sentry from '@sentry/vue';
-import { BrowserTracing } from '@sentry/tracing';
 import VueGtag from 'vue-gtag-next';
 import KonamiCode from 'vue3-konami-code';
 import toasty from 'toasty';
@@ -144,8 +143,11 @@ if (VUE_SENTRY_ENABLED == 1) {
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
-    trackComponents: true,
-    hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
+    // trackComponents and hooks moved under tracingOptions in @sentry/vue v8+.
+    tracingOptions: {
+      trackComponents: true,
+      hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
+    },
     environment: VUE_ENVIRONMENT,
     beforeBreadcrumb(breadcrumb, hint) {
       return breadcrumb.category === 'ui.click' ? null : breadcrumb;

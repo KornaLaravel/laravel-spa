@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="VULTR_REFERRAL_ENABLED"
-      class="border-1 mb-5 inline-block flex-auto items-center rounded-md border border-blue-400 bg-gray-100 p-0 shadow-lg dark:bg-gray-900"
+      class="border mb-5 inline-block flex-auto items-center rounded-md border border-blue-400 bg-gray-100 p-0 shadow-lg dark:bg-gray-900"
     >
       <a
         :href="VULTR_REFERRAL_LINK"
@@ -13,7 +13,7 @@
         <img
           :src="referralImage"
           alt="Vultr Hosting Services"
-          class="ml-auto mr-auto mb-4 rounded-t"
+          class="ml-auto mr-auto mb-4 rounded-t-sm"
           style="width: 100%; max-width: 300px"
         />
         <h2 class="mb-4 text-2xl font-medium text-slate-700 dark:text-slate-100">

@@ -1,7 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -90,10 +91,10 @@ return [
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     'locales' => [
-        'en'    => 'EN',
-        'bn'    => 'BN',
-        'es'    => 'ES',
-        'fr'    => 'FR',
+        'en' => 'EN',
+        'bn' => 'BN',
+        'es' => 'ES',
+        'fr' => 'FR',
         'pt-BR' => 'BR',
         'zh-CN' => '中文',
     ],
@@ -134,34 +135,8 @@ return [
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store'  => env('APP_MAINTENANCE_STORE', 'database'),
+        'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
-    |--------------------------------------------------------------------------
-    |
-    | The service providers listed here will be automatically loaded on the
-    | request to your application. Feel free to add your own services to
-    | this array to grant expanded functionality to your applications.
-    |
-    */
-
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        // Package Service Providers...
-    ])->merge([
-        App\Providers\ViewComposerServiceProvider::class,
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
-        QCod\Settings\SettingsServiceProvider::class,
-    ])->merge([
-        // Added Service Providers (Do not remove this line)...
-    ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------

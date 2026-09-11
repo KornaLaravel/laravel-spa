@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -48,17 +50,17 @@ class RolesController extends Controller
         $validated = $request->validated();
 
         $role = Role::create([
-            'name'          => $validated['name'],
-            'slug'          => $validated['slug'],
-            'description'   => $validated['description'],
-            'level'         => $validated['level'],
+            'name' => $validated['name'],
+            'slug' => $validated['slug'],
+            'description' => $validated['description'],
+            'level' => $validated['level'],
         ]);
 
         if ($role) {
             $role->syncPermissions($validated['permissions']);
 
             return response()->json([
-                'role'  => $role,
+                'role' => $role,
             ]);
         }
     }
@@ -74,7 +76,7 @@ class RolesController extends Controller
         $role->syncPermissions($validated['permissions']);
 
         return response()->json([
-            'role'  => $role,
+            'role' => $role,
         ]);
     }
 

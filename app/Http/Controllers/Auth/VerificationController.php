@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = AppServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -44,8 +46,6 @@ class VerificationController extends Controller
 
     /**
      * Mark the authenticated user's email address as verified.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function verify(Request $request)
     {
@@ -71,8 +71,6 @@ class VerificationController extends Controller
 
     /**
      * Resend the email verification notification.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function resend(Request $request)
     {

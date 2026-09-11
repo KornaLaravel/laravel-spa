@@ -6,21 +6,21 @@
       <AdminBreadcrumb route-name="browser_sessions.index" :text="$t('browser_sessions')" />
     </AdminBreadcrumbContainer>
 
-    <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
+    <div class="mx-auto max-w-(--breakpoint-lg) text-gray-900 clear-both">
       <div class="flex justify-center">
         <div class="flex-1">
-          <div class="w-auto rounded border dark:border-gray-600">
+          <div class="w-auto rounded-sm border dark:border-gray-600">
             <div class="border-b p-4 font-semibold dark:border-gray-600 dark:text-gray-200">
               {{ $t('browser_sessions') }}
             </div>
-            <div class="rounded bg-white p-4 dark:bg-slate-800 dark:text-gray-300">
+            <div class="rounded-sm bg-white p-4 dark:bg-slate-800 dark:text-gray-300">
               <p class="mb-4">
                 {{ $t('browser_sessions_note') }}
               </p>
               <ul v-if="sessions && sessions.length > 0" role="list" class="divide-y divide-white/5 mb-4">
                 <li v-for="session in sessions" :key="session.id" class="py-4">
                   <div class="flex items-center gap-x-3">
-                    <ComputerDesktopIcon class="size-6 flex-none rounded text-gray-800" />
+                    <ComputerDesktopIcon class="size-6 flex-none rounded-sm text-gray-800" />
                     <h3 class="flex-auto truncate text-sm/6 font-bold text-gray-800">
                       {{ session?.device?.platform }} -
                       {{ session?.device?.browser }}

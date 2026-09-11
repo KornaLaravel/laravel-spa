@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -17,8 +19,6 @@ class SendActivationEmail extends Notification implements ShouldQueue
      * Create a new notification instance.
      *
      * SendActivationEmail constructor.
-     *
-     * @param  $token
      */
     public function __construct($token)
     {
@@ -41,11 +41,11 @@ class SendActivationEmail extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
-        $message = new MailMessage();
+        $message = new MailMessage;
         $message->subject(trans('emails.activation.subject'))
             ->greeting(trans('emails.activation.greeting'))
             ->line(trans('emails.activation.message'))

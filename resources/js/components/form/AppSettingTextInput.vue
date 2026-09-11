@@ -7,7 +7,7 @@
       :name="setting.key"
       :placeholder="setting.name"
       :disabled="disabled || loading"
-      class="w-100 mb-3 w-full border-transparent text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 rounded dark:bg-gray-900 dark:text-gray-100 border-0"
+      class="w-100 mb-3 w-full border-transparent text-slate-800 shadow-xs outline-0 focus:outline-0 active:outline-0 rounded-sm dark:bg-gray-900 dark:text-gray-100 border-0"
       :value="setting.val"
       @blur="updateSetting($event.target.value)"
       @keyup.enter="$event.target.blur()"

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -26,11 +28,11 @@ class UsersTableSeeder extends Seeder
             $user = User::where('email', '=', $seededSuperAdmin)->first();
             if ($user === null) {
                 $user = User::updateOrCreate([
-                    'name'                          => config('users.seeders.superAdmin.name'),
-                    'email'                         => $seededSuperAdmin,
-                    'password'                      => Hash::make(config('users.seeders.superAdmin.password')),
-                    'email_verified_at'             => now(),
-                    'theme_dark'                    => false,
+                    'name' => config('users.seeders.superAdmin.name'),
+                    'email' => $seededSuperAdmin,
+                    'password' => Hash::make(config('users.seeders.superAdmin.password')),
+                    'email_verified_at' => now(),
+                    'theme_dark' => false,
                 ]);
                 $user->attachRole($superAdminRole);
             }
@@ -41,11 +43,11 @@ class UsersTableSeeder extends Seeder
             $user = User::where('email', '=', $seededAdmin)->first();
             if ($user === null) {
                 $user = User::updateOrCreate([
-                    'name'                          => config('users.seeders.admin.name'),
-                    'email'                         => $seededAdmin,
-                    'password'                      => Hash::make(config('users.seeders.admin.password')),
-                    'email_verified_at'             => now(),
-                    'theme_dark'                    => false,
+                    'name' => config('users.seeders.admin.name'),
+                    'email' => $seededAdmin,
+                    'password' => Hash::make(config('users.seeders.admin.password')),
+                    'email_verified_at' => now(),
+                    'theme_dark' => false,
                 ]);
                 $user->attachRole($adminRole);
             }
@@ -56,11 +58,11 @@ class UsersTableSeeder extends Seeder
             $user = User::where('email', '=', $seededUser)->first();
             if ($user === null) {
                 $user = User::updateOrCreate([
-                    'name'                          => config('users.seeders.user.name'),
-                    'email'                         => $seededUser,
-                    'password'                      => Hash::make(config('users.seeders.user.password')),
-                    'email_verified_at'             => now(),
-                    'theme_dark'                    => false,
+                    'name' => config('users.seeders.user.name'),
+                    'email' => $seededUser,
+                    'password' => Hash::make(config('users.seeders.user.password')),
+                    'email_verified_at' => now(),
+                    'theme_dark' => false,
                 ]);
                 $user->attachRole($userRole);
             }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -26,12 +28,12 @@ class AppSettingsController extends Controller
         $settings = Setting::all();
 
         return response()->json([
-            'authSettings'          => $settings->where('group', 'auth')->values(),
-            'analyticsSettings'     => $settings->where('group', 'analytics')->values(),
-            'generalSettings'       => $settings->where('group', 'general')->values(),
-            'monitoringSettings'    => $settings->where('group', 'monitoring')->values(),
-            'metaSettings'          => $settings->where('group', 'app-meta')->values(),
-            'secretSettings'        => $settings->where('group', 'secrets')->values(),
+            'authSettings' => $settings->where('group', 'auth')->values(),
+            'analyticsSettings' => $settings->where('group', 'analytics')->values(),
+            'generalSettings' => $settings->where('group', 'general')->values(),
+            'monitoringSettings' => $settings->where('group', 'monitoring')->values(),
+            'metaSettings' => $settings->where('group', 'app-meta')->values(),
+            'secretSettings' => $settings->where('group', 'secrets')->values(),
         ]);
     }
 
@@ -43,7 +45,7 @@ class AppSettingsController extends Controller
         $this->processSettingForAdditionalAppChanges($setting);
 
         return response()->json([
-            'data'  => $setting,
+            'data' => $setting,
         ]);
     }
 }

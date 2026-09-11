@@ -58,29 +58,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.vue-pagination {
-  .pagination-container {
-    @apply flex;
-    column-gap: 5px;
-  }
-  .paginate-buttons {
-    height: 40px;
-    width: 40px;
-    @apply rounded cursor-pointer bg-gray-100 text-black dark:bg-gray-900 dark:text-white;
-    &:hover {
-      @apply bg-gray-300 dark:bg-gray-700;
-    }
-    &.active-page {
-      @apply cursor-default bg-blue-300 hover:bg-blue-300 text-white dark:bg-blue-800 dark:hover:bg-blue-800;
-    }
-  }
-  .back-button,
-  .next-button,
-  .last-page-button,
-  .first-page-button {
-    // @apply bg-gray-200;
-  }
-}
-</style>

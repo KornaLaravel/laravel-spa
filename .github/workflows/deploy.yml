@@ -6,20 +6,25 @@ on:
   push:
     branches:
       - released
-  pull_request:
-    types: [approved]
-    branches:
-      - released
   pull_request_review:
     types: [submitted]
-    branches:
-      - released
 
 jobs:
   build:
+    # GitHub ignores "branches:" filters on pull_request_review, so this
+    # workflow fired on every review of every pull request no matter which
+    # branch it targeted, and tried to deploy from an unmerged branch. The
+    # previous "pull_request: types: [approved]" trigger never fired at all,
+    # because "approved" is a review state, not a pull_request activity type.
+    # Guard here instead so a deploy only happens for the released branch.
+    if: >-
+      github.ref == 'refs/heads/released' ||
+      (github.event_name == 'pull_request_review' &&
+      github.event.review.state == 'approved' &&
+      github.event.pull_request.base.ref == 'released')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         with:
@@ -34,7 +39,7 @@ jobs:
 #     runs-on: ubuntu-latest
 #     steps:
 #       - run: echo "This PR was approved"
-#       - uses: actions/checkout@v2
+#       - uses: actions/checkout@v5
 #       - name: Deploy to server
 #         uses: appleboy/ssh-action@master
 #         with:

@@ -8,7 +8,7 @@
     <SwitchComp
       :default-checked="isDarkMode"
       :class="isDarkMode ? 'bg-gray-500' : 'bg-gray-400'"
-      class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
       style="margin-top: 5px"
     >
       <span class="sr-only">Toggle Theme</span>

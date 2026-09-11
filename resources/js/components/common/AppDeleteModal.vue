@@ -1,6 +1,6 @@
 <template>
   <div v-if="show" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-gray-700 dark:bg-opacity-75" />
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity dark:bg-gray-700/75" />
 
     <div class="fixed inset-0 z-10 overflow-y-auto">
       <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -15,7 +15,7 @@
             <div v-else class="sm:flex sm:items-start">
               <div
                 v-if="showIcon"
-                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+                class="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
               >
                 <ExclamationTriangleIcon class="h-6 w-6 text-red-500" />
               </div>

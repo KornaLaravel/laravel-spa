@@ -1,14 +1,14 @@
 <template>
-  <div class="mx-auto max-w-screen-md text-gray-900">
+  <div class="mx-auto max-w-(--breakpoint-md) text-gray-900">
     <div class="flex justify-center">
       <div class="flex-1">
-        <div class="w-auto rounded border">
+        <div class="w-auto rounded-sm border">
           <div class="border-b px-4 py-3 font-semibold text-gray-600">
             {{ $t('register') }}
           </div>
-          <div class="rounded bg-white p-4 dark:bg-slate-800">
+          <div class="rounded-sm bg-white p-4 dark:bg-slate-800">
             <!-- <Errors v-if="errors && useInlineMessage" :content="form.errors" type="error" @close="errors = null" /> -->
-            <form class="mx-auto w-full rounded md:w-10/12 md:p-4" @submit.prevent="submitRegister">
+            <form class="mx-auto w-full rounded-sm md:w-10/12 md:p-4" @submit.prevent="submitRegister">
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label
                   for="name"
@@ -26,7 +26,7 @@
                     autocomplete="name"
                     :class="{ 'border-red-500': validationErrors?.name }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+                    class="w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-hidden dark:bg-gray-800 dark:text-gray-200"
                   />
                   <div v-for="message in validationErrors?.name" :key="message" class="text-xs text-red-500 absolute">
                     {{ message }}
@@ -50,7 +50,7 @@
                     autocomplete="username"
                     :class="{ 'border-red-500': validationErrors?.email }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+                    class="w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-hidden dark:bg-gray-800 dark:text-gray-200"
                   />
                   <div v-for="message in validationErrors?.email" :key="message" class="text-xs text-red-500 absolute">
                     {{ message }}
@@ -74,7 +74,7 @@
                     autocomplete="current-password"
                     :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+                    class="w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-hidden dark:bg-gray-800 dark:text-gray-200"
                   />
                   <div
                     v-for="message in validationErrors?.password"
@@ -101,7 +101,7 @@
                     name="password_confirmation"
                     :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+                    class="w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-hidden dark:bg-gray-800 dark:text-gray-200"
                   />
                   <div
                     v-for="message in validationErrors?.password_confirmation"
@@ -112,14 +112,14 @@
                   </div>
                 </div>
               </div>
-              <div class="my-1 w-full rounded py-2 sm:flex sm:items-center sm:justify-end">
-                <div class="mt-3 flex w-full items-center justify-between rounded sm:mt-0 sm:w-8/12">
+              <div class="my-1 w-full rounded-sm py-2 sm:flex sm:items-center sm:justify-end">
+                <div class="mt-3 flex w-full items-center justify-between rounded-sm sm:mt-0 sm:w-8/12">
                   <AppButton
                     primary
                     :loading="processing.value"
                     :disabled="processing.value"
                     :text="processing.value ? $t('register') : $t('register')"
-                    btn-class="uppercase leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+                    btn-class="uppercase leading-snug inline-block rounded-sm bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-hidden focus:ring-0 active:bg-indigo-800 active:shadow-lg "
                     type="submit"
                   >
                     <template #text>

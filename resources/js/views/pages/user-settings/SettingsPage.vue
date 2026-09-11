@@ -17,7 +17,7 @@
               class="w-full sm:w-12/12 md:w-12/12 lg:w-12/12 xl:w-4/12"
             >
               <figure
-                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-sm hover:bg-gray-200 dark:hover:bg-slate-700"
+                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow-sm dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-xs hover:bg-gray-200 dark:hover:bg-slate-700"
               >
                 <figcaption class="flex justify-left items-center text-gray-700 dark:text-gray-300">
                   <i class="fa fa-cog fa-fw fa-2x" />
@@ -35,7 +35,7 @@
               class="w-full sm:w-6/12 md:w-6/12 lg:w-6/12 xl:w-4/12"
             >
               <figure
-                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-sm hover:bg-gray-200 dark:hover:bg-slate-700"
+                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow-sm dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-xs hover:bg-gray-200 dark:hover:bg-slate-700"
               >
                 <figcaption class="flex justify-left items-center text-gray-700 dark:text-gray-300">
                   <i class="fa fa-user fa-fw fa-2x" />
@@ -53,7 +53,7 @@
               class="w-full sm:w-6/12 md:w-6/12 lg:w-6/12 xl:w-4/12"
             >
               <figure
-                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-sm hover:bg-gray-200 dark:hover:bg-slate-700"
+                class="m-2 flex flex-col justify-left p-6 text-left rounded-lg shadow-sm dark:shadow-none bg-gray-100 text-gray-600 dark:border-slate-900 dark:bg-slate-900 hover:shadow-xs hover:bg-gray-200 dark:hover:bg-slate-700"
               >
                 <figcaption class="flex justify-left items-center text-gray-700 dark:text-gray-300">
                   <i class="fa fa-key fa-fw fa-2x" />

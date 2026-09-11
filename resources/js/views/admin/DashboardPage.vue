@@ -4,14 +4,14 @@
       <AdminBreadcrumb route-name="dashboard" :text="$t('dashboard')" />
     </AdminBreadcrumbContainer>
 
-    <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
+    <div class="mx-auto max-w-(--breakpoint-lg) text-gray-900 clear-both">
       <div class="flex justify-center">
         <div class="flex-1">
-          <div class="w-auto rounded border dark:border-gray-600">
+          <div class="w-auto rounded-sm border dark:border-gray-600">
             <div class="border-b p-4 font-semibold dark:border-gray-600 dark:text-gray-200">
               {{ $t('dashboard') }}
             </div>
-            <div class="rounded bg-white p-4 dark:bg-slate-800 dark:text-gray-300">
+            <div class="rounded-sm bg-white p-4 dark:bg-slate-800 dark:text-gray-300">
               <h1 class="mt-4 mb-4 text-center text-2xl">
                 {{ greeting() }}, {{ user && user.name ? user.name : 'Registered User' }}!
               </h1>

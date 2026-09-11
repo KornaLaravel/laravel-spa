@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use Carbon\Carbon;
@@ -8,7 +10,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\URL;
 
-class VerifyEmailNotification extends verifyEmail implements ShouldQueue
+class VerifyEmailNotification extends VerifyEmail implements ShouldQueue
 {
     use Queueable;
 
@@ -24,7 +26,7 @@ class VerifyEmailNotification extends verifyEmail implements ShouldQueue
             'verify',
             Carbon::now()->addMinutes(60),
             [
-                'id'   => $notifiable->getKey(),
+                'id' => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
             ]
         );

@@ -34,19 +34,19 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 
 ## App Features
 ##### Built on:
-- [Laravel 12.x](https://github.com/laravel/laravel)
+- [Laravel 13.x](https://github.com/laravel/laravel)
 - [Laravel Sanctum](https://laravel.com/docs/11.x/sanctum)
 - [Socialite](https://laravel.com/docs/11.x/socialite)
 - [Vite](https://laravel.com/docs/9.x/vite)
 - [Vue 3](https://github.com/vuejs/vue)
-- [TailwindCSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
+- [TailwindCSS 4 (w/ `@tailwindcss/forms` and `@tailwindcss/typography`)](https://tailwindcss.com/)
 - [Vue Router](https://router.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
 - [Axios](https://axios-http.com/)
 - [Vue I18n](https://vue-i18n.intlify.dev)
 - [Headless UI](https://headlessui.com/)
 - [Heroicons](https://heroicons.com/)
-- [Font Awesome 6](https://fontawesome.com/search)
+- [Font Awesome 7](https://fontawesome.com/search)
 - [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/docs/en/index.html)
 
 ##### Features:
@@ -68,7 +68,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 
 The following Sanctum features are implemented in this Vue SPA:
 
-- ✅ Laravel 11
+- ✅ Laravel 13
 - ✅ Vue 3
 - ✅ VueRouter
 - ✅ Pinia
@@ -90,6 +90,9 @@ The following Sanctum features are implemented in this Vue SPA:
 - ✅ User Activity Logs
 
 ## Installation Instructions
+
+**Requirements:** PHP >= 8.4, Composer, and Node.js >= 22.13 (this repo's `.nvmrc` pins Node 24).
+
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
 2. Create a MySQL database for the project
     * ```mysql -u root -p```, if using Vagrant: ```mysql -u homestead -psecret```
@@ -196,12 +199,10 @@ The following Sanctum features are implemented in this Vue SPA:
 LaravelSpa
 ├── .editorconfig
 ├── .env.example
-├── .eslintrc.js
-├── .eslintrc.json
 ├── .gitattributes
 ├── .github
-│   ├── FUNDING.yml
 │   ├── dependabot.yml
+│   ├── FUNDING.yml
 │   ├── labeler.yml
 │   └── workflows
 │       ├── build-changelog.yml
@@ -218,19 +219,15 @@ LaravelSpa
 │       ├── sentry.yml
 │       └── stale.yml
 ├── .gitignore
+├── .nvmrc
+├── .phpunit.result.cache
 ├── .prettierignore
 ├── .prettierrc.json
 ├── .scripts
 │   └── deploy.sh
 ├── .styleci.yml
-├── LICENSE
-├── README.md
-├── SECURITY.md
 ├── app
-│   ├── Console
-│   │   └── Kernel.php
 │   ├── Exceptions
-│   │   ├── Handler.php
 │   │   └── SocialProviderDeniedException.php
 │   ├── Http
 │   │   ├── Controllers
@@ -261,17 +258,6 @@ LaravelSpa
 │   │   │   │   └── VerificationController.php
 │   │   │   ├── Controller.php
 │   │   │   └── HomeController.php
-│   │   ├── Kernel.php
-│   │   ├── Middleware
-│   │   │   ├── Authenticate.php
-│   │   │   ├── EncryptCookies.php
-│   │   │   ├── PreventRequestsDuringMaintenance.php
-│   │   │   ├── RedirectIfAuthenticated.php
-│   │   │   ├── TrimStrings.php
-│   │   │   ├── TrustHosts.php
-│   │   │   ├── TrustProxies.php
-│   │   │   ├── ValidateSignature.php
-│   │   │   └── VerifyCsrfToken.php
 │   │   ├── Requests
 │   │   │   ├── Admin
 │   │   │   │   ├── AdminDashboardRequest.php
@@ -304,7 +290,6 @@ LaravelSpa
 │   │   │   ├── StoreRoleRequest.php
 │   │   │   ├── StoreUserRequest.php
 │   │   │   ├── UpdateProfileRequest.php
-│   │   │   ├── User
 │   │   │   └── Users
 │   │   │       ├── CreateUserRequest.php
 │   │   │       ├── DeleteUserRequest.php
@@ -356,10 +341,6 @@ LaravelSpa
 │   │   └── VerifyEmailNotification.php
 │   ├── Providers
 │   │   ├── AppServiceProvider.php
-│   │   ├── AuthServiceProvider.php
-│   │   ├── BroadcastServiceProvider.php
-│   │   ├── EventServiceProvider.php
-│   │   ├── RouteServiceProvider.php
 │   │   └── ViewComposerServiceProvider.php
 │   ├── Services
 │   │   └── AppleToken.php
@@ -377,7 +358,7 @@ LaravelSpa
 │   │   ├── .gitignore
 │   │   ├── packages.php
 │   │   └── services.php
-│   └── ssr
+│   └── providers.php
 ├── composer.json
 ├── composer.lock
 ├── config
@@ -437,13 +418,14 @@ LaravelSpa
 │   │   ├── 2024_11_25_022836_create_permission_tables.php
 │   │   ├── 2025_01_23_093055_create_activity_log_table.php
 │   │   ├── 2025_01_23_093056_add_event_column_to_activity_log_table.php
-│   │   └── 2025_01_23_093057_add_batch_uuid_column_to_activity_log_table.php
+│   │   ├── 2025_01_23_093057_add_batch_uuid_column_to_activity_log_table.php
+│   │   └── 2026_09_10_000000_upgrade_activity_log_table_to_activitylog_v5.php
 │   └── seeders
 │       ├── AppSettingsSeeder.php
 │       ├── ConnectRelationshipsSeeder.php
 │       ├── DatabaseSeeder.php
-│       ├── PermissionTableSeeder.php
 │       ├── PermissionsTableSeeder.php
+│       ├── PermissionTableSeeder.php
 │       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
 ├── eslint.config.js
@@ -454,11 +436,11 @@ LaravelSpa
 │       ├── pagination.php
 │       ├── passwords.php
 │       └── validation.php
+├── LICENSE
 ├── package-lock.json
 ├── package.json
 ├── phpunit.xml
-├── postcss.config.js
-├── prettier.config.js
+├── pint.json
 ├── public
 │   ├── .htaccess
 │   ├── android-chrome-192x192.png
@@ -475,6 +457,7 @@ LaravelSpa
 │   ├── serviceworker.js
 │   ├── site.webmanifest
 │   └── sw.js
+├── README.md
 ├── resources
 │   ├── css
 │   │   ├── app.css
@@ -538,8 +521,6 @@ LaravelSpa
 │   │   ├── app.js
 │   │   ├── bootstrap.js
 │   │   ├── components
-│   │   │   ├── LocaleSwitcher.vue
-│   │   │   ├── ToggleDarkMode.vue
 │   │   │   ├── admin
 │   │   │   │   ├── CreateComp.vue
 │   │   │   │   ├── EditComp.vue
@@ -553,8 +534,8 @@ LaravelSpa
 │   │   │   │   ├── AppModal.vue
 │   │   │   │   ├── AppSwitch.vue
 │   │   │   │   ├── AppTable.vue
-│   │   │   │   ├── CKEditorComponent.vue
 │   │   │   │   ├── CircleSvg.vue
+│   │   │   │   ├── CKEditorComponent.vue
 │   │   │   │   ├── DropZone.vue
 │   │   │   │   ├── ErrorsNotice.vue
 │   │   │   │   ├── ImpersonateUser.vue
@@ -571,16 +552,16 @@ LaravelSpa
 │   │   │   │   └── UmoEditor.vue
 │   │   │   ├── form
 │   │   │   │   ├── AppPasswordInput.vue
-│   │   │   │   ├── AppSettingTextInput.vue
 │   │   │   │   ├── AppSettingTextarea.vue
+│   │   │   │   ├── AppSettingTextInput.vue
 │   │   │   │   ├── AppSettingToggle.vue
 │   │   │   │   └── AppTextInput.vue
 │   │   │   ├── includes
 │   │   │   │   ├── AdminBreadcrumb.vue
 │   │   │   │   ├── AdminBreadcrumbContainer.vue
 │   │   │   │   ├── AdminBreadcrumbSep.vue
-│   │   │   │   ├── AdminNavBarLink.vue
 │   │   │   │   ├── AdminNavbar.vue
+│   │   │   │   ├── AdminNavBarLink.vue
 │   │   │   │   ├── AdminSidebar.vue
 │   │   │   │   ├── AdminSidebarLink.vue
 │   │   │   │   ├── AppFooter.vue
@@ -589,6 +570,7 @@ LaravelSpa
 │   │   │   │   └── NavLink.vue
 │   │   │   ├── loaders
 │   │   │   │   └── AnimatedTableLoader.vue
+│   │   │   ├── LocaleSwitcher.vue
 │   │   │   ├── plugs
 │   │   │   │   ├── BmcButtons.vue
 │   │   │   │   ├── GHButton.vue
@@ -600,6 +582,7 @@ LaravelSpa
 │   │   │   │   ├── PermissionFormModal.vue
 │   │   │   │   ├── RoleFormModal.vue
 │   │   │   │   └── RolesBadges.vue
+│   │   │   ├── ToggleDarkMode.vue
 │   │   │   └── users
 │   │   │       ├── UserForm.vue
 │   │   │       └── UserFormModal.vue
@@ -653,32 +636,31 @@ LaravelSpa
 │   │       │   ├── AdminPage.vue
 │   │       │   ├── AppSettings.vue
 │   │       │   ├── BrowserSessions.vue
-│   │       │   ├── DashboardPage.vue
-│   │       │   ├── PermissionsPage.vue
-│   │       │   ├── PhpInfo.vue
-│   │       │   ├── RolesPage.vue
-│   │       │   ├── UsersPage.vue
 │   │       │   ├── categories
 │   │       │   │   ├── CategoryIndex.vue
 │   │       │   │   ├── CreateCategory.vue
 │   │       │   │   └── EditCategory.vue
-│   │       │   └── posts
-│   │       │       ├── AdminCreatePost.vue
-│   │       │       ├── AdminEditPost.vue
-│   │       │       └── AdminPostsIndex.vue
+│   │       │   ├── DashboardPage.vue
+│   │       │   ├── PermissionsPage.vue
+│   │       │   ├── PhpInfo.vue
+│   │       │   ├── posts
+│   │       │   │   ├── AdminCreatePost.vue
+│   │       │   │   ├── AdminEditPost.vue
+│   │       │   │   └── AdminPostsIndex.vue
+│   │       │   ├── RolesPage.vue
+│   │       │   └── UsersPage.vue
 │   │       ├── auth
-│   │       │   ├── Verify.vue
-│   │       │   └── passwords
-│   │       │       ├── ConfirmPage.vue
-│   │       │       ├── RequestReset.vue
-│   │       │       └── ResetPage.vue
+│   │       │   ├── passwords
+│   │       │   │   ├── ConfirmPage.vue
+│   │       │   │   ├── RequestReset.vue
+│   │       │   │   └── ResetPage.vue
+│   │       │   └── Verify.vue
 │   │       ├── category
 │   │       │   └── CatPostsPage.vue
 │   │       ├── errors
 │   │       │   └── NotFound.vue
 │   │       ├── home
 │   │       │   └── HomePage.vue
-│   │       ├── kiosk
 │   │       ├── login
 │   │       │   └── LoginPage.vue
 │   │       ├── misc
@@ -705,7 +687,6 @@ LaravelSpa
 │   │       └── templates
 │   │           ├── Bare.vue
 │   │           └── Blank.vue
-│   ├── lang
 │   ├── pwa
 │   │   ├── serviceworker.js
 │   │   └── sw.js
@@ -731,13 +712,10 @@ LaravelSpa
 │   ├── channels.php
 │   ├── console.php
 │   └── web.php
-├── tailwind.config.js
-├── tailwindcss-perspective.js
-├── vite.config.js
-└── vue.config.js
+├── SECURITY.md
+└── vite.config.js
 
-105 directories, 437 files
-
+99 directories, 419 files
 ```
 
 * Tree command can be installed using brew: `brew install tree`
