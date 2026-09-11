@@ -2,13 +2,13 @@
   <div>
     <div
       v-if="showModal"
-      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none"
+      class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-hidden focus:outline-hidden"
     >
       <div class="relative my-6 mx-auto w-auto" :class="modalWidthClass">
         <div
-          class="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-slate-600"
+          class="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-hidden focus:outline-hidden dark:bg-slate-600"
         >
-          <div class="flex items-start justify-between rounded-t p-5">
+          <div class="flex items-start justify-between rounded-t-sm p-5">
             <!-- border-b border-solid border-slate-200 -->
             <h3 class="text-3xl font-semibold">
               <slot v-if="hasTitleSlot" name="title" />
@@ -16,7 +16,7 @@
             <AppButton
               v-if="showClose"
               text="X"
-              class="text-1xl float-right border-0 bg-transparent text-gray-600 shadow-none outline-none hover:text-gray-800 focus:outline-none"
+              class="text-1xl float-right border-0 bg-transparent text-gray-600 shadow-none outline-hidden hover:text-gray-800 focus:outline-hidden"
               @click="closeModal()"
             />
           </div>
@@ -27,7 +27,7 @@
             <!-- rounded-b border-t border-solid border-slate-200 -->
             <slot v-if="hasFooterSlot" name="footer" />
           </div>
-          <div v-else class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6">
+          <div v-else class="flex items-center justify-end rounded-b-sm border-t border-solid border-slate-200 p-6">
             <AppButton
               v-if="showConfirmButton"
               secondary

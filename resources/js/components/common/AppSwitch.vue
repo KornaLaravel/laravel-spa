@@ -2,7 +2,7 @@
   <span v-tippy="enableTooltip ? (enabled ? tooltipOff : tooltipOn) : null" class="mt-1 inline-block">
     <Switch
       :class="enabled ? 'bg-green-600 dark:bg-green-500' : 'bg-gray-400 dark:bg-gray-600'"
-      class="relative inline-flex h-[24px] w-[40px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      class="relative inline-flex h-[24px] w-[40px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
     >
       <span class="sr-only">Use setting</span>
       <span

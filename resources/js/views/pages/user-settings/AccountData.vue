@@ -11,8 +11,8 @@
         {{ $t('download_data_msg') }}
       </span>
     </h2>
-    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-      <div class="inline-flex rounded-md shadow">
+    <div class="mt-8 flex lg:mt-0 lg:shrink-0">
+      <div class="inline-flex rounded-md shadow-sm">
         <UserDownloadData />
       </div>
     </div>

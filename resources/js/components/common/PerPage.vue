@@ -1,5 +1,5 @@
 <template>
-  <div v-if="items && items.length >= 1" class="inline-block rounded border pl-4">
+  <div v-if="items && items.length >= 1" class="inline-block rounded-sm border pl-4">
     <label>Per Page</label>
     <select
       id="perPage"
@@ -9,15 +9,15 @@
       class="utline-0 border-0 bg-transparent text-center text-gray-600 focus:outline-0 active:outline-0 dark:text-gray-100"
       @change="$emit('changed', per)"
     >
-      <option value="1" class="focus:outline-none">1</option>
-      <option value="5" class="focus:outline-none">5</option>
-      <option value="10" class="focus:outline-none">10</option>
-      <option value="25" class="focus:outline-none">25</option>
-      <option value="50" class="focus:outline-none">50</option>
-      <option value="100" class="focus:outline-none">100</option>
-      <option value="1000" class="focus:outline-none">1000</option>
-      <option value="1000" class="focus:outline-none">10000</option>
-      <option value="1000000000000" class="focus:outline-none">All</option>
+      <option value="1" class="focus:outline-hidden">1</option>
+      <option value="5" class="focus:outline-hidden">5</option>
+      <option value="10" class="focus:outline-hidden">10</option>
+      <option value="25" class="focus:outline-hidden">25</option>
+      <option value="50" class="focus:outline-hidden">50</option>
+      <option value="100" class="focus:outline-hidden">100</option>
+      <option value="1000" class="focus:outline-hidden">1000</option>
+      <option value="1000" class="focus:outline-hidden">10000</option>
+      <option value="1000000000000" class="focus:outline-hidden">All</option>
     </select>
   </div>
 </template>

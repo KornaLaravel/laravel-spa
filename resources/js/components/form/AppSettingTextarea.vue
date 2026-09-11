@@ -7,7 +7,7 @@
       :name="setting.key"
       :placeholder="setting.name"
       :disabled="disabled || loading"
-      class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+      class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-xs outline-0 focus:outline-0 active:outline-0 dark:rounded-sm dark:border-b-slate-300"
       :value="setting.val"
       :rows="rows"
       :cols="cols"

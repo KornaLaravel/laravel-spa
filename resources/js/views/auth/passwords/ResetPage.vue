@@ -1,15 +1,15 @@
 <template>
-  <div class="mx-auto max-w-screen-md text-gray-900">
+  <div class="mx-auto max-w-(--breakpoint-md) text-gray-900">
     <div class="flex justify-center">
       <div class="flex-1">
-        <div class="w-auto border rounded">
+        <div class="w-auto border rounded-sm">
           <div class="border-b p-4 font-semibold text-gray-700 dark:text-gray-300">
             {{ $t('reset_your_password') }}
           </div>
           <div class="p-4">
             <div
               v-if="success.value"
-              class="mx-auto text-center py-6 bg-green-500 rounded border-0 text-white relative"
+              class="mx-auto text-center py-6 bg-green-500 rounded-sm border-0 text-white relative"
             >
               <CheckCircleIcon class="h-20 w-20 mx-auto" />
               <p class="font-semibold">
@@ -48,7 +48,7 @@
                       type="password"
                       name="password"
                       autocomplete="new-password"
-                      class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none2"
+                      class="mt-3 w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-none2"
                       :class="{
                         'text-red-500 dark:text-red-500 dark:border-red-500':
                           validationErrors?.password || validationErrors?.password_confirmation,
@@ -84,7 +84,7 @@
                       type="password"
                       autocomplete="new-password"
                       name="password_confirmation"
-                      class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none2"
+                      class="mt-3 w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-none2"
                       :class="{
                         'text-red-500 dark:text-red-500 dark:border-red-500':
                           validationErrors?.password || validationErrors?.password_confirmation,
@@ -115,7 +115,7 @@
                       :loading="processing.value"
                       :disabled="processing.value || success"
                       :text="processing.value ? 'Send Email' : 'Send Email'"
-                      btn-class="uppercase leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+                      btn-class="uppercase leading-snug inline-block rounded-sm bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-hidden focus:ring-0 active:bg-indigo-800 active:shadow-lg "
                       type="submit"
                     >
                       <template #text>

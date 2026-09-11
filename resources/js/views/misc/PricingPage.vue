@@ -42,7 +42,7 @@
             <svg
               viewBox="0 0 1208 1024"
               aria-hidden="true"
-              class="hidden dark:block absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-48 lg:bottom-auto lg:translate-y-0"
+              class="hidden dark:block absolute -bottom-48 left-1/2 h-256 -translate-x-1/2 translate-y-1/2 mask-[radial-gradient(closest-side,white,transparent)] lg:-top-48 lg:bottom-auto lg:translate-y-0"
             >
               <ellipse cx="604" cy="512" fill="url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)" rx="604" ry="512" />
               <defs>
@@ -92,7 +92,7 @@
                     :aria-describedby="tier.id"
                     :class="[
                       tier.featured
-                        ? 'bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600'
+                        ? 'bg-indigo-600 shadow-xs hover:bg-indigo-500 focus-visible:outline-indigo-600'
                         : 'bg-white/10 hover:bg-white/20 focus-visible:outline-white',
                       'rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
                     ]"
@@ -159,13 +159,13 @@
                       <!-- Fake card background -->
                       <div
                         aria-hidden="true"
-                        class="absolute inset-y-0 right-0 hidden w-1/2 rounded-lg bg-white shadow-sm sm:block"
+                        class="absolute inset-y-0 right-0 hidden w-1/2 rounded-lg bg-white shadow-xs sm:block"
                       />
 
                       <div
                         :class="[
                           tier.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-900/10',
-                          'relative rounded-lg bg-white shadow-sm sm:rounded-none sm:bg-transparent sm:shadow-none sm:ring-0',
+                          'relative rounded-lg bg-white shadow-xs sm:rounded-none sm:bg-transparent sm:shadow-none sm:ring-0',
                         ]"
                       >
                         <dl class="divide-y divide-gray-200 text-sm/6">
@@ -242,9 +242,9 @@
                 <div class="relative -mx-8 mt-10">
                   <!-- Fake card backgrounds -->
                   <div class="absolute inset-x-8 inset-y-0 grid grid-cols-4 gap-x-8 before:block" aria-hidden="true">
-                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
-                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
-                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
+                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-xs" />
+                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-xs" />
+                    <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-xs" />
                   </div>
 
                   <table class="relative w-full border-separate border-spacing-x-8">

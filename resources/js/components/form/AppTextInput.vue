@@ -20,7 +20,7 @@
         :value="modelValue"
         :placeholder="placeholder"
         :disabled="disabled"
-        class="w-full rounded border px-4 bg-white p-2 focus:outline-none dark:bg-slate-900 sm:mt-0"
+        class="w-full rounded-sm border px-4 bg-white p-2 focus:outline-hidden dark:bg-slate-900 sm:mt-0"
         :class="
           inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')
         "

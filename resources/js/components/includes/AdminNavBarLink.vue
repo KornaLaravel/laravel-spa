@@ -18,7 +18,7 @@
 
     <div
       v-if="!routeName"
-      class="flex cursor-pointer items-center rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
+      class="flex cursor-pointer items-center rounded-b-sm p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
       @click.prevent="navClicked()"
     >
       <slot v-if="hasIconSlot" name="icon" />

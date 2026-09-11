@@ -4,7 +4,7 @@
       <div class="flex">
         <div class="mr-4 flex items-center lg:hidden">
           <button
-            class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
+            class="navbar-burger rounded-sm text-gray-600 hover:border-white hover:text-gray-500 focus:outline-hidden dark:bg-slate-800 dark:hover:bg-slate-800"
             :class="sideBarOpenGetter ? 'bg-slate-100 text-gray-900 dark:text-gray-100' : ''"
             @click.prevent="toggleSidebarTrigger()"
           >
@@ -18,7 +18,7 @@
         <div class="hidden lg:inline-flex">
           <div class="mr-4 flex items-center">
             <button
-              class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
+              class="navbar-burger rounded-sm text-gray-600 hover:border-white hover:text-gray-500 focus:outline-hidden dark:bg-slate-800 dark:hover:bg-slate-800"
               @click.prevent="toggleFullScreenSidebarTrigger()"
             >
               <span v-if="!fullScreenSideBarOpenGetter" class="sr-only">Open menu</span>
@@ -110,14 +110,14 @@
     <div ref="dropMenu" class="relative mt-1 z-50">
       <div
         v-show="dropDownOpen"
-        class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900 transition ease-in-out duration-75"
+        class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded-sm border bg-white shadow-md dark:bg-slate-900 transition ease-in-out duration-75"
         @click="dropDownOpen = !dropDownOpen"
       >
         <AdminNavBarLink
           v-if="authenticated && user"
           route-name="dashboard"
           :text="$t('dashboard')"
-          item-class="rounded-t"
+          item-class="rounded-t-sm"
         >
           <template #icon>
             <BuildingLibraryIcon class="h-6 w-6" />
@@ -133,7 +133,7 @@
         <AdminNavBarLink
           v-if="authenticated && user"
           :text="$t('logout')"
-          item-class="rounded-b"
+          item-class="rounded-b-sm"
           @nav-clicked="logout()"
         >
           <template #icon>

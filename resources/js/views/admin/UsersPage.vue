@@ -60,15 +60,15 @@
             v-if="item && item.avatar"
             :src="item.avatar"
             :alt="item.name"
-            class="h-8 w-8 cursor-default rounded-full border shadow float-left"
+            class="h-8 w-8 cursor-default rounded-full border shadow-sm float-left"
           />
-          <UserCircleIcon v-else class="mt-0 h-8 w-8 cursor-default shadow float-left" />
+          <UserCircleIcon v-else class="mt-0 h-8 w-8 cursor-default shadow-sm float-left" />
 
           <input
             v-model="item.name"
             v-tippy="'Edit Name'"
             type="text"
-            class="rounded border-0 text-sm mr-3 px-1 ml-2"
+            class="rounded-sm border-0 text-sm mr-3 px-1 ml-2"
             style="field-sizing: content"
             :class="locked(item) ? 'disabled bg-transparent' : 'bg-gray-100 dark:bg-gray-800'"
             :readonly="locked(item)"
@@ -81,7 +81,7 @@
         <a
           v-if="locked(item)"
           v-tippy="'Send email to ' + item.email"
-          class="rounded border-0 text-sm whitespace-nowrap mr-2 pl-1"
+          class="rounded-sm border-0 text-sm whitespace-nowrap mr-2 pl-1"
           :href="'mailto:' + item.email"
         >
           {{ item.email }}
@@ -91,7 +91,7 @@
           v-model="item.email"
           v-tippy="'Edit Email'"
           type="text"
-          class="rounded border-0 text-sm whitespace-nowrap mr-2 pl-1"
+          class="rounded-sm border-0 text-sm whitespace-nowrap mr-2 pl-1"
           style="field-sizing: content"
           :class="locked(item) ? 'disabled bg-transparent' : 'bg-gray-100 dark:bg-gray-800'"
           :readonly="locked(item)"
@@ -124,7 +124,7 @@
             v-for="permission in item.permissions"
             :key="permission.id"
             :value="permission"
-            class="mr-1 mb-1 cursor-default rounded text-xs font-medium whitespace-nowrap"
+            class="mr-1 mb-1 cursor-default rounded-sm text-xs font-medium whitespace-nowrap"
           >
             <small>
               {{ permission.name }}
@@ -189,7 +189,7 @@
           <AppButton
             v-if="authenticated && user && (userIs('superadmin') || userCan('edit.users'))"
             :loading="!dataReady"
-            class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
+            class="mr-2 inline-block rounded-sm px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-hidden focus:ring-0 active:shadow-lg dark:text-white"
             :btn-class="
               locked(item)
                 ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'

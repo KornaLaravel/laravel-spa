@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative mx-auto flex w-full items-start rounded border border-red-400 bg-red-400 px-4 py-3 text-white dark:border-red-600 dark:bg-red-600 md:p-2"
+    class="relative mx-auto flex w-full items-start rounded-sm border border-red-400 bg-red-400 px-4 py-3 text-white dark:border-red-600 dark:bg-red-600 md:p-2"
     :class="containerClass"
     role="alert shadow"
   >

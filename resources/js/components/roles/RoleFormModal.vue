@@ -22,7 +22,7 @@
               type="text"
               placeholder="Name"
               name="name"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.name
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
@@ -30,7 +30,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
             >
               <span class="fas fa-lock" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -46,7 +46,7 @@
               type="text"
               placeholder="Slug"
               name="slug"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.slug
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
@@ -54,7 +54,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-code" :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -70,7 +70,7 @@
               type="text"
               placeholder="Description"
               name="description"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.description
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
@@ -78,7 +78,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-pencil" :class="errors && errors.description ? 'text-red-600' : 'text-slate-300'" />
             </span>
@@ -94,7 +94,7 @@
               type="number"
               placeholder="Level"
               name="level"
-              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              class="relative w-full rounded-sm border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow-sm outline-hidden focus:outline-hidden"
               :class="
                 errors && errors.level
                   ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
@@ -102,7 +102,7 @@
               "
             />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded-sm bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
               <span class="fas fa-pencil" :class="errors && errors.level ? 'text-red-600' : 'text-slate-300'" />
             </span>

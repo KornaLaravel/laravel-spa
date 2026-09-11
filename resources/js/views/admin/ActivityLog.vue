@@ -6,10 +6,10 @@
       <AdminBreadcrumb route-name="activity_log.index" :text="$t('activity_logs')" />
     </AdminBreadcrumbContainer>
 
-    <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
+    <div class="mx-auto max-w-(--breakpoint-lg) text-gray-900 clear-both">
       <div class="flex justify-center">
         <div class="flex-1">
-          <div class="w-auto rounded border dark:border-gray-600">
+          <div class="w-auto rounded-sm border dark:border-gray-600">
             <div class="border-b p-4 font-semibold dark:border-gray-600 dark:text-gray-200">
               {{ $t('activity_logs') }}
             </div>
@@ -48,7 +48,7 @@
               </div>
               <div class="hidden sm:block">
                 <nav
-                  class="isolate flex divide-x divide-gray-200 dark:divide-gray-500 rounded-lg shadow"
+                  class="isolate flex divide-x divide-gray-200 dark:divide-gray-500 rounded-lg shadow-sm"
                   aria-label="Tabs"
                 >
                   <div
@@ -140,7 +140,7 @@
               </div>
             </div>
 
-            <div class="rounded bg-white mx-4 my-2 dark:bg-slate-800 dark:text-gray-300">
+            <div class="rounded-sm bg-white mx-4 my-2 dark:bg-slate-800 dark:text-gray-300">
               <ul v-if="activities?.data?.length > 0" role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li
                   v-for="activity in activities?.data"
@@ -149,7 +149,7 @@
                 >
                   <div class="flex items-center gap-x-3">
                     <i
-                      class="fas fa-user-check rounded h-8 w-9 p-1 text-center text-2xl"
+                      class="fas fa-user-check rounded-sm h-8 w-9 p-1 text-center text-2xl"
                       :class="{
                         'bg-green-700 text-white':
                           activity.event === 'updated' || activity.event === 'created' || activity.event === 'login',
@@ -178,14 +178,14 @@
               </ul>
               <div
                 v-if="activities?.data?.length == 0"
-                class="text-center p-6 my-6 bg-gray-200 dark:bg-gray-900 rounded"
+                class="text-center p-6 my-6 bg-gray-200 dark:bg-gray-900 rounded-sm"
               >
                 {{ $t('no_records_found') }}
               </div>
             </div>
 
             <div v-if="activities?.data?.length > 0" class="text-center">
-              <div class="flex items-center justify-between border-t rounded-b border-gray-200 px-4 py-3 sm:px-4">
+              <div class="flex items-center justify-between border-t rounded-b-sm border-gray-200 px-4 py-3 sm:px-4">
                 <div class="flex flex-1 justify-between md:hidden">
                   <div
                     :class="{ disabled: currentPage === 1 }"

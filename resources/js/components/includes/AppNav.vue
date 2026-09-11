@@ -20,7 +20,7 @@
 
         <div class="-my-2 -mr-2 md:hidden">
           <PopoverButton
-            class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:bg-slate-800 dark:hover:bg-slate-800"
+            class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:bg-slate-800 dark:hover:bg-slate-800"
             @click="openDrop"
           >
             <span class="sr-only">Open menu</span>
@@ -91,7 +91,7 @@
 
             <div
               v-show="drop"
-              class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900"
+              class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded-sm border bg-white shadow-md dark:bg-slate-900"
               @click="drop = !drop"
             >
               <!-- TODO: ADMIN INFO SIGNAL HERE -->
@@ -99,7 +99,7 @@
               <!-- TODO: SETTINGS LINK HERE -->
 
               <div
-                class="flex cursor-pointer items-center rounded-b hover:rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-600 hover:text-white"
+                class="flex cursor-pointer items-center rounded-b-sm hover:rounded-b-sm p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-600 hover:text-white"
                 @click.prevent="(logout(), closeDrop())"
               >
                 <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6" />
@@ -147,7 +147,7 @@
             class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
           >
             <div
-              class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:divide-gray-700 dark:bg-slate-900"
+              class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black/5 dark:divide-gray-700 dark:bg-slate-900"
             >
               <div class="px-5 pt-5 pb-6">
                 <div class="flex items-center justify-between">
@@ -168,7 +168,7 @@
                   </div>
                   <div class="-mr-2">
                     <PopoverButton
-                      class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:bg-slate-800"
+                      class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:bg-slate-800"
                     >
                       <span class="sr-only">Close menu</span>
                       <XMarkIcon class="h-6 w-6" aria-hidden="true" />
@@ -282,7 +282,7 @@
                     <AppButton
                       primary
                       :text="$t('signup')"
-                      class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                      class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                       :class="[isActive && 'opacity-60']"
                       @click="close"
                     />

@@ -121,7 +121,7 @@
                 </div>
               </div>
 
-              <div class="col-span-full rounded">
+              <div class="col-span-full rounded-sm">
                 <label for="cover-photo" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300"
                   >Thumbnail</label
                 >

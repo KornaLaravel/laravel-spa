@@ -3,7 +3,7 @@
     v-if="authenticated && user && isImpersonating && !full"
     v-tippy="$t('return_to_your_account')"
     icon="fa-solid fa-user-secret"
-    class="h-3 w-3 rounded"
+    class="h-3 w-3 rounded-sm"
     :class="classes"
     warning
     @click.prevent="triggerLeaveImpersonatingUser()"

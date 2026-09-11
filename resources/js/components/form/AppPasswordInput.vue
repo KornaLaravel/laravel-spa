@@ -21,7 +21,7 @@
           :value="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"
-          class="col-start-1 row-start-1 block w-full px-4 pr-10 text-base rounded border bg-white p-2 focus:outline-none dark:bg-slate-900 sm:mt-0"
+          class="col-start-1 row-start-1 block w-full px-4 pr-10 text-base rounded-sm border bg-white p-2 focus:outline-hidden dark:bg-slate-900 sm:mt-0"
           :class="
             inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')
           "
