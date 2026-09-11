@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
+use App\Providers\AppServiceProvider;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -27,8 +31,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function login(LoginRequest $request)
     {
@@ -51,14 +54,13 @@ class AuthenticatedSessionController extends Controller
             return response()->json(['user' => $request->user(), 'token' => $token]);
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(AppServiceProvider::HOME);
     }
 
     /**
      * Destroy an authenticated session.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function logout(Request $request)
     {
@@ -89,7 +91,6 @@ class AuthenticatedSessionController extends Controller
     /**
      * Create User.
      *
-     * @param  RegisterRequest  $request
      * @return JsonResponse
      */
     public function register(RegisterRequest $request)
@@ -100,9 +101,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         $user = User::create([
-            'email'    => $request['email'],
+            'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'name'     => $request['name'],
+            'name' => $request['name'],
         ]);
 
         return $this->successResponse($user, 'Registration Successfully');

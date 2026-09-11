@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
@@ -9,6 +11,7 @@ use App\Models\SocialiteProvider;
 use App\Traits\SocialiteProvidersTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
@@ -21,6 +24,7 @@ class SocialiteController extends Controller
     use SocialiteProvidersTrait;
 
     private $providerSettings;
+
     private $providerConfigs;
 
     public function __construct()
@@ -42,8 +46,7 @@ class SocialiteController extends Controller
     /**
      * Get a list of enabled socialite logins.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function loginsEnabled(Request $request)
     {
@@ -56,8 +59,7 @@ class SocialiteController extends Controller
      * Gets the social redirect.
      *
      * @param  string  $provider  The provider
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function getSocialRedirect(Request $request, string $provider)
     {
@@ -114,11 +116,11 @@ class SocialiteController extends Controller
             $url = $this->twitterUserAuthenticationUrl($state);
         } else {
             $url = Socialite::driver($provider)
-                        ->stateless()
-                        ->with($with)
-                        ->scopes($scopes)
-                        ->redirect()
-                        ->getTargetUrl();
+                ->stateless()
+                ->with($with)
+                ->scopes($scopes)
+                ->redirect()
+                ->getTargetUrl();
         }
 
         if ($provider == 'stackexchange') {
@@ -134,14 +136,13 @@ class SocialiteController extends Controller
      * Gets the social handle information from the provider.
      *
      * @param  string  $provider  The provider
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function handleSocialCallback(Request $request, string $provider)
     {
         $denied = $request->denied ? $request->denied : null;
         if ($denied != null || $denied != '') {
-            throw new SocialProviderDeniedException();
+            throw new SocialProviderDeniedException;
         }
 
         if ($provider == 'twitter') {
@@ -167,8 +168,8 @@ class SocialiteController extends Controller
         }
 
         $providerFound = SocialiteProvider::where('provider', $provider)
-                            ->where('user_id', $user->id)
-                            ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         if ($providerFound) {
             $providerFound->updated_at = now();
@@ -176,15 +177,15 @@ class SocialiteController extends Controller
         }
 
         return view('socialite/callback', [
-            'token'         => $token,
-            'token_type'    => 'bearer',
+            'token' => $token,
+            'token_type' => 'bearer',
         ]);
     }
 
     /**
      * Get Twitter Oauth1.0 Url built with identifier if user is present.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function twitterUserAuthenticationUrl($state = null)
@@ -212,7 +213,6 @@ class SocialiteController extends Controller
     /**
      * Get Twitter user credentials from Oauth1.0.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function twitterUserAuthentication(Request $request)
@@ -224,16 +224,16 @@ class SocialiteController extends Controller
         $connection = new TwitterOAuth($consumerKey, $consumerSecret, $request->oauth_token);
 
         $access_token = $connection->oauth('oauth/access_token', [
-            'oauth_verifier'    => $request->oauth_verifier,
-            'oauth_token'       => $request->oauth_token,
+            'oauth_verifier' => $request->oauth_verifier,
+            'oauth_token' => $request->oauth_token,
         ]);
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
         return $connection->get('account/verify_credentials', [
-            'include_email'     => true,
-            'skip_status'       => true,
-            'include_entities'  => false,
+            'include_email' => true,
+            'skip_status' => true,
+            'include_entities' => false,
         ]);
     }
 
@@ -241,9 +241,7 @@ class SocialiteController extends Controller
      * Revoke a social media login provider for
      * a user from the app and from the provider.
      *
-     * @param  \App\Models\SocialiteProvider  $provider
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function revokeSocialProvider(SocialiteProvider $provider, Request $request)
     {
@@ -256,9 +254,9 @@ class SocialiteController extends Controller
         $provider->delete();
 
         return response()->json([
-            'status'    => 'success',
-            'provider'  => $provider,
-            'user'      => $user,
+            'status' => 'success',
+            'provider' => $provider,
+            'user' => $user,
         ]);
     }
 }
